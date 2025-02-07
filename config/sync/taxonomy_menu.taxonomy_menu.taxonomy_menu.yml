@@ -1,0 +1,16 @@
+uuid: 13d98e3e-8cb8-4ecc-84a5-ab45269c40ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+    - taxonomy.vocabulary.tags
+id: taxonomy_menu
+label: 'Taxonomy Menu'
+vocabulary: tags
+menu: main
+expanded: true
+depth: 0
+menu_parent: 'main:menu_link_content:4e55d69e-709e-4528-b9cc-3866073eeece'
+description_field_name: ''
+use_term_weight_order: true

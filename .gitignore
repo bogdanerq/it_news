@@ -1,0 +1,64 @@
+# Ignore dependencies that are managed with Composer.
+# Generally you should only ignore the root vendor directory. It's important
+# that core/assets/vendor and any other vendor directories within contrib or
+# custom module, theme, etc., are not ignored unless you purposely do so.
+/vendor/
+/core/
+/modules/README.txt
+/modules/contrib/
+/profiles/README.txt
+/profiles/contrib/
+/sites/README.txt
+/themes/README.txt
+/themes/contrib/
+config/sync/README.txt
+config/sync/.htaccess
+
+# Ignore configuration files that may contain sensitive information.
+sites/*/default.settings.php
+#sites/*/settings*.php
+sites/*/default.services.yml
+#sites/*/services*.yml
+
+# Ignore paths that contain user-generated content.
+sites/*/files/
+sites/*/private/
+
+# Ignore multi-site test environment.
+sites/simpletest
+
+# Ignore paths that contain user-generated content.
+/sites/*/files
+/sites/*/public
+/sites/*/private
+/sites/*/files-public
+/sites/*/files-private
+
+# Ignore paths that may contain temporary files
+/sites/*/translations
+/sites/*/tmp
+/sites/*/cache
+
+
+## Ignore drupal core (if not versioning drupal sources)
+/sites/development.services.yml
+/sites/example.settings.local.php
+/sites/example.sites.php
+/.csslintrc
+/.editorconfig
+/.eslintignore
+/.eslintrc.json
+/.gitattributes
+/.htaccess
+/.ht.router.php
+/autoload.php
+/example.gitignore
+/index.php
+/INSTALL.txt
+/LICENSE.txt
+/README.md
+/robots.txt
+/update.php
+/web.config
+
+.idea
