@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
     - filter.format.restricted_html
   module:
     - comment
@@ -20,5 +21,8 @@ permissions:
   - 'access comments'
   - 'access content'
   - 'access site-wide contact form'
+  - 'post comments'
   - 'search content'
+  - 'skip comment approval'
+  - 'use text format basic_html'
   - 'use text format restricted_html'

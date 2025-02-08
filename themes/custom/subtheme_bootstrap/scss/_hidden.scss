@@ -1,0 +1,12 @@
+// hidden elements
+
+// language active selector in dropdown
+.advanced-language-selector {
+  li.active {
+    display: none;
+  }
+}
+// About text formats element in comments
+[id*="-format-help"] {
+  display: none;
+}

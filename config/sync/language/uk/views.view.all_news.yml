@@ -1,0 +1,24 @@
+label: 'Всі новини'
+display:
+  page_1:
+    display_options:
+      sorts:
+        created:
+          expose:
+            label: Створено
+      filters:
+        field_tags_target_id:
+          expose:
+            label: Категорія
+      menu:
+        title: 'Всі новини'
+  default:
+    display_options:
+      title: 'Всі новини'
+      exposed_form:
+        options:
+          submit_button: Виконати
+          reset_button_label: Скинути
+          exposed_sorts_label: Сортувати
+          sort_asc_label: Старіші
+          sort_desc_label: Новіші

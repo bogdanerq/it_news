@@ -5,6 +5,7 @@ dependencies:
   config:
     - comment.type.comment
     - field.storage.comment.comment_body
+    - filter.format.basic_html
   module:
     - text
 _core:
@@ -16,9 +17,10 @@ bundle: comment
 label: Comment
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  allowed_formats: {  }
+  allowed_formats:
+    - basic_html
 field_type: text_long

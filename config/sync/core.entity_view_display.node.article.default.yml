@@ -35,6 +35,12 @@ content:
     settings:
       view_mode: default
       pager_id: 0
+      language_filter:
+        language_interface: language_interface
+        en: '0'
+        uk: '0'
+        und: '0'
+        zxx: '0'
     third_party_settings: {  }
     weight: 110
     region: content

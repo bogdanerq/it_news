@@ -16,7 +16,9 @@
     ],
     "require": {
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.5",
+        "drupal/advanced_language_selector": "^1.5",
         "drupal/bootstrap": "^5.0",
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",
@@ -38,15 +40,22 @@
     "config": {
         "allow-plugins": {
             "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
-            "phpstan/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },
     "extra": {
+        "enable-patching": true,
+        "patches": {
+            "drupal/core": {
+                "Comments are not filtered on language": "https://www.drupal.org/files/issues/2024-01-23/2751267-62.patch"
+            }
+        },
         "drupal-scaffold": {
             "locations": {
                 "web-root": "./"

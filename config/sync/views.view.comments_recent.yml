@@ -191,6 +191,7 @@ display:
             label: ''
             field_identifier: cid
           exposed: false
+      arguments: {  }
       filters:
         status:
           id: status
