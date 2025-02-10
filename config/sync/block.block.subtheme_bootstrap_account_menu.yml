@@ -13,7 +13,7 @@ _core:
 id: subtheme_bootstrap_account_menu
 theme: subtheme_bootstrap
 region: secondary_menu
-weight: -7
+weight: -6
 provider: null
 plugin: 'system_menu_block:account'
 settings:

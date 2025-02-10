@@ -1,0 +1,13 @@
+display:
+  default:
+    display_title: Базово
+    display_options:
+      fields:
+        filename:
+          label: "Назва (ім'я)"
+        status:
+          label: Стан
+      filters:
+        status:
+          expose:
+            label: Стан

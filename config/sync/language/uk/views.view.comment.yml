@@ -1,0 +1,12 @@
+display:
+  default:
+    display_title: Базово
+    display_options:
+      fields:
+        comment_bulk_form:
+          action_title: Дія
+  page_unapproved:
+    display_options:
+      fields:
+        comment_bulk_form:
+          action_title: Дія

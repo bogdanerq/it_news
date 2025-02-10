@@ -9,7 +9,7 @@ _core:
 id: subtheme_bootstrap_page_title
 theme: subtheme_bootstrap
 region: content
-weight: -7
+weight: -5
 provider: null
 plugin: page_title_block
 settings:

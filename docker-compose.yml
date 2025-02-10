@@ -15,6 +15,7 @@ services:
 
   php:
     image: drupal:10
+    user: "1000:1000"
     container_name: drupal-php
     restart: always
     depends_on:

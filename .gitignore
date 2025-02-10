@@ -13,6 +13,7 @@
 /themes/contrib/
 config/sync/README.txt
 config/sync/.htaccess
+/libraries/
 
 # Ignore configuration files that may contain sensitive information.
 sites/*/default.settings.php

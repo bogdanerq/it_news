@@ -1,17 +1,5 @@
 label: 'Всі новини'
 display:
-  page_1:
-    display_options:
-      sorts:
-        created:
-          expose:
-            label: Створено
-      filters:
-        field_tags_target_id:
-          expose:
-            label: Категорія
-      menu:
-        title: 'Всі новини'
   default:
     display_options:
       title: 'Всі новини'
@@ -22,3 +10,23 @@ display:
           exposed_sorts_label: Сортувати
           sort_asc_label: Старіші
           sort_desc_label: Новіші
+  news_page:
+    display_options:
+      sorts:
+        created:
+          expose:
+            label: Створено
+      filters:
+        field_tags_target_id:
+          expose:
+            label: Категорії
+        created:
+          expose:
+            label: 'Період новин'
+            min_placeholder: від
+            max_placeholder: до
+        keys:
+          expose:
+            label: 'Ключові слова'
+      menu:
+        title: 'Всі новини'

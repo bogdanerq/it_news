@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.small_teaser
     - core.entity_view_mode.node.teaser
     - node.type.article
     - system.menu.main
@@ -12,6 +13,7 @@ dependencies:
     - search
     - taxonomy
     - user
+    - views_slideshow
 id: all_news
 label: 'All News'
 module: views
@@ -127,7 +129,7 @@ display:
           expose:
             label: 'Authored on'
             field_identifier: created
-          exposed: true
+          exposed: false
           granularity: second
       arguments: {  }
       filters:
@@ -224,135 +226,11 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_1:
-    id: block_1
-    display_title: Block
-    display_plugin: block
-    position: 2
-    display_options:
-      fields:
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 5
-      filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          value:
-            article: article
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      style:
-        type: default
-      row:
-        type: fields
-      defaults:
-        pager: false
-        style: false
-        row: false
-        fields: false
-        filters: false
-        filter_groups: false
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  page_1:
-    id: page_1
+  news_page:
+    id: news_page
     display_title: Page
     display_plugin: page
     position: 1
@@ -371,7 +249,7 @@ display:
           order: DESC
           expose:
             label: Created
-            field_identifier: newest
+            field_identifier: created
           exposed: true
           granularity: second
       filters:
@@ -463,7 +341,7 @@ display:
           exposed: true
           expose:
             operator_id: created_op
-            label: 'Authored on'
+            label: 'News period'
             description: ''
             use_operator: false
             operator: created_op
@@ -478,8 +356,8 @@ display:
               anonymous: '0'
               content_editor: '0'
               administrator: '0'
-            min_placeholder: ''
-            max_placeholder: ''
+            min_placeholder: from
+            max_placeholder: to
             placeholder: ''
           is_grouped: false
           group_info:
@@ -601,6 +479,256 @@ display:
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  slider_news:
+    id: slider_news
+    display_title: Block
+    display_plugin: block
+    position: 2
+    display_options:
+      title: 'Newest News'
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 5
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: 'Authored on'
+            field_identifier: created
+          exposed: false
+          granularity: second
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            article: article
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: slideshow
+        options:
+          row_class: ''
+          default_row_class: true
+          slideshow_skin: default
+          slideshow_type: views_slideshow_cycle
+          widgets:
+            top:
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_pager:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_bullets
+                views_slideshow_pager_bullets:
+                  views_slideshow_pager_bullets_hover: 0
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                  views_slideshow_pager_fields_hover: 0
+            bottom:
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_pager:
+                enable: true
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_bullets
+                views_slideshow_pager_bullets:
+                  views_slideshow_pager_bullets_hover: 0
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                  views_slideshow_pager_fields_hover: 0
+          views_slideshow_cycle:
+            effect: scrollHorz
+            transition_advanced: 0
+            timeout: '5000'
+            speed: '700'
+            delay: '0'
+            sync: 1
+            random: 0
+            pause: 1
+            pause_on_click: 0
+            action_advanced: 0
+            start_paused: 0
+            remember_slide: 0
+            remember_slide_days: '1'
+            pause_in_middle: 0
+            pause_when_hidden: 0
+            pause_when_hidden_type: full
+            amount_allowed_visible: ''
+            nowrap: 0
+            fixed_height: 1
+            items_per_slide: '1'
+            items_per_slide_first: 0
+            items_per_slide_first_number: '1'
+            wait_for_image_load: 1
+            wait_for_image_load_timeout: '3000'
+            cleartype: 0
+            cleartypenobg: 0
+            advanced_options_choices: '0'
+            advanced_options_entry: ''
+            advanced_options: '{}'
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: small_teaser
+      defaults:
+        title: false
+        pager: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

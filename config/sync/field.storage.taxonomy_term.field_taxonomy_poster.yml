@@ -1,0 +1,30 @@
+uuid: eda4086a-f504-401f-95b1-433ec2a0c161
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - image
+    - taxonomy
+id: taxonomy_term.field_taxonomy_poster
+field_name: field_taxonomy_poster
+entity_type: taxonomy_term
+type: image
+settings:
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  default_image:
+    uuid: d393345f-0031-4a8e-9156-62eab3f28e79
+    alt: ''
+    title: ''
+    width: 2200
+    height: 1042
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

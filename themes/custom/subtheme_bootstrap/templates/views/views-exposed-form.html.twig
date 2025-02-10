@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Theme override for a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+{% if q is not empty %}
+  {#
+    This ensures that, if clean URLs are off, the 'q' is added first,
+    as a hidden form element, so that it shows up first in the POST URL.
+  #}
+{{ q }}
+{% endif %}
+
+{# Change sort by one item #}
+{% set form_id = form['#id']|default('') %}
+{% if form_id == 'views-exposed-form-all-news-news-page' %}
+  {% set sort_by_label = form.sort_by['#options']|first %}
+  {% set form = form|merge({'sort_order': form.sort_order|merge({'#title': sort_by_label})}) %}
+  {% set form = form|merge({'sort_by': null}) %}
+{% endif %}
+
+<div class="d-flex flex-wrap">
+  {{ form }}
+</div>

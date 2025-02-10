@@ -29,8 +29,10 @@
         "drupal/pathauto": "^1.13",
         "drupal/taxonomy_menu": "^3.7",
         "drupal/ultimate_cron": "^2.0@beta",
+        "drupal/views_slideshow": "^5.0",
         "drupal/webform": "^6.2",
-        "drush/drush": "^13.3"
+        "drush/drush": "^13.3",
+        "wikimedia/composer-merge-plugin": "^2.1"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -45,7 +47,8 @@
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "wikimedia/composer-merge-plugin": true
         },
         "sort-packages": true
     },
@@ -66,6 +69,8 @@
                 "type:drupal-core"
             ],
             "libraries/{$name}": [
+                "type:bower-asset",
+                "type:npm-asset",
                 "type:drupal-library"
             ],
             "modules/contrib/{$name}": [
@@ -89,6 +94,15 @@
             "themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
+        },
+        "merge-plugin": {
+            "include": [
+                "modules/contrib/views_slideshow/composer.libraries.json",
+                "modules/contrib/views_slideshow/modules/views_slideshow_cycle/composer.libraries.json"
+            ],
+            "merge-extra": true,
+            "merge-extra-deep": true,
+            "merge-scripts": true
         },
         "drupal-core-project-message": {
             "include-keys": [
