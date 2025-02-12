@@ -5,6 +5,12 @@ display:
       fields:
         status:
           label: Стан
+        operations:
+          label: Операції
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Елементів на сторінку'
       filters:
         status:
           group_info:

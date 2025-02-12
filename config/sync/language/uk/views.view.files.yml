@@ -7,7 +7,19 @@ display:
           label: "Назва (ім'я)"
         status:
           label: Стан
+        operations:
+          label: Операції
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Елементів на сторінку'
       filters:
         status:
           expose:
             label: Стан
+  page_2:
+    display_options:
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Елементів на сторінку'

@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Contains custom implementations for News Maker API.
+ */
+
+/**
+ * Implements hook_cron().
+ */
+function news_maker_api_cron() {
+//  $fetcher = \Drupal::service('news_maker_api.fetcher');
+//  $fetcher->fetchNews();
+}

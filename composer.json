@@ -27,9 +27,12 @@
         "drupal/date_popup": "^2.0",
         "drupal/paragraphs": "^1.18",
         "drupal/pathauto": "^1.13",
+        "drupal/queue_ui": "^3.2",
         "drupal/taxonomy_menu": "^3.7",
         "drupal/ultimate_cron": "^2.0@beta",
+        "drupal/views_field_view": "^1.0@beta",
         "drupal/views_slideshow": "^5.0",
+        "drupal/viewsreference": "^2.0@beta",
         "drupal/webform": "^6.2",
         "drush/drush": "^13.3",
         "wikimedia/composer-merge-plugin": "^2.1"

@@ -1,0 +1,10 @@
+uuid: 3fe3f1fa-007f-473d-a59a-b3cff2f55309
+langcode: en
+status: true
+dependencies: {  }
+id: slider_news
+label: 'Slider news'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

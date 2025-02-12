@@ -1,0 +1,7 @@
+news_maker_api.settings:
+  path: '/admin/config/news-maker-api/settings'
+  defaults:
+    _form: '\Drupal\news_maker_api\Form\NewsMakerApiSettingsForm'
+    _title: 'News maker api settings'
+  requirements:
+    _permission: 'administer site configuration'

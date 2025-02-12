@@ -7,12 +7,16 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_image
+    - field.field.node.article.field_link
+    - field.field.node.article.field_source
     - field.field.node.article.field_tags
+    - field.field.node.article.field_uuid
     - image.style.wide
     - node.type.article
   module:
     - comment
     - image
+    - link
     - text
     - user
 _core:
@@ -27,7 +31,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 2
     region: content
   comment:
     type: comment_default
@@ -42,7 +46,7 @@ content:
         und: '0'
         zxx: '0'
     third_party_settings: {  }
-    weight: 110
+    weight: 6
     region: content
   field_image:
     type: image
@@ -53,7 +57,27 @@ content:
       image_loading:
         attribute: eager
     third_party_settings: {  }
-    weight: -1
+    weight: 0
+    region: content
+  field_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_source:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
     region: content
   field_tags:
     type: entity_reference_label
@@ -61,12 +85,13 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 10
+    weight: 4
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 5
     region: content
 hidden:
+  field_uuid: true
   langcode: true

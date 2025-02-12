@@ -1,0 +1,24 @@
+uuid: 9ce03903-1656-4491-aa03-b0a182902635
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.slider_news.field_slider
+    - paragraphs.paragraphs_type.slider_news
+  module:
+    - viewsreference
+id: paragraph.slider_news.default
+targetEntityType: paragraph
+bundle: slider_news
+mode: default
+content:
+  field_slider:
+    type: viewsreference_formatter
+    label: hidden
+    settings:
+      plugin_types:
+        - block
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

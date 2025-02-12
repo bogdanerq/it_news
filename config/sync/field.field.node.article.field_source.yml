@@ -1,0 +1,19 @@
+uuid: e3030e10-7407-4a43-a812-f83f0c67e233
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source
+    - node.type.article
+id: node.article.field_source
+field_name: field_source
+entity_type: node
+bundle: article
+label: source
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

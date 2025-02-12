@@ -1,11 +1,39 @@
 display:
+  default:
+    display_options:
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Елементів на сторінку'
+      fields:
+        created:
+          label: Створено
+        view_webform_submission:
+          label: Операції
   embed_administer:
     display_options:
       fields:
         webform_submission_bulk_form:
           action_title: Дія
+        created:
+          label: Створено
+        operations:
+          label: Операції
   embed_manage:
     display_options:
       fields:
         webform_submission_bulk_form:
           action_title: Дія
+        created:
+          label: Створено
+        view_webform_submission:
+          label: Операції
+        edit_webform_submission:
+          label: Операції
+  embed_review:
+    display_options:
+      fields:
+        created:
+          label: Створено
+        view_webform_submission:
+          label: Операції

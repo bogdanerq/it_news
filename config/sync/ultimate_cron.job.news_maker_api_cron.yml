@@ -1,0 +1,17 @@
+uuid: e6a6feb1-ad16-4a01-b795-5ee31e153563
+langcode: en
+status: true
+dependencies:
+  module:
+    - news_maker_api
+title: 'Default cron handler'
+id: news_maker_api_cron
+weight: 0
+module: news_maker_api
+callback: 'news_maker_api#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

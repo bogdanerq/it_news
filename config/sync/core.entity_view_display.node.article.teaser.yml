@@ -7,7 +7,10 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_image
+    - field.field.node.article.field_link
+    - field.field.node.article.field_source
     - field.field.node.article.field_tags
+    - field.field.node.article.field_uuid
     - image.style.medium
     - node.type.article
   module:
@@ -55,4 +58,7 @@ content:
     region: content
 hidden:
   comment: true
+  field_link: true
+  field_source: true
+  field_uuid: true
   langcode: true

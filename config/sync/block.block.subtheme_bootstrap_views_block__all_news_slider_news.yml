@@ -5,14 +5,14 @@ dependencies:
   config:
     - views.view.all_news
   module:
-    - node
+    - system
     - views
   theme:
     - subtheme_bootstrap
 id: subtheme_bootstrap_views_block__all_news_slider_news
 theme: subtheme_bootstrap
 region: content
-weight: -6
+weight: -3
 provider: null
 plugin: 'views_block:all_news-slider_news'
 settings:
@@ -23,10 +23,7 @@ settings:
   views_label: ''
   items_per_page: none
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
+  request_path:
+    id: request_path
     negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-    bundles:
-      page: page
+    pages: '<front>'

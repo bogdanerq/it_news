@@ -5,8 +5,16 @@ display:
       fields:
         comment_bulk_form:
           action_title: Дія
+        operations:
+          label: Операції
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Елементів на сторінку'
   page_unapproved:
     display_options:
       fields:
         comment_bulk_form:
           action_title: Дія
+        operations:
+          label: Операції

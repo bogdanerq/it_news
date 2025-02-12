@@ -1,0 +1,19 @@
+uuid: c0ad07b9-3d6b-401b-beb3-9607cc652113
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_uuid
+    - node.type.article
+id: node.article.field_uuid
+field_name: field_uuid
+entity_type: node
+bundle: article
+label: uuid
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

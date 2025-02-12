@@ -1,0 +1,30 @@
+uuid: eb74bccb-2160-46e6-a0b3-239d74cf9eac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_slider
+    - paragraphs.paragraphs_type.slider_news
+  module:
+    - viewsreference
+id: paragraph.slider_news.field_slider
+field_name: field_slider
+entity_type: paragraph
+bundle: slider_news
+label: Slider
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+  plugin_types:
+    block: block
+  preselect_views:
+    all_news: all_news
+  enabled_settings: {  }
+field_type: viewsreference
