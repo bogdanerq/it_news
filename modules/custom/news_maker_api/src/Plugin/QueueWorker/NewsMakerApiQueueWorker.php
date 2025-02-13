@@ -2,6 +2,8 @@
 
 namespace Drupal\news_maker_api\Plugin\QueueWorker;
 
+use Drupal\Core\Annotation\QueueWorker;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\node\Entity\Node;
 use Psr\Log\LoggerInterface;
@@ -20,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   cron = {"time" = 60}
  * )
  */
-class NewsMakerApiQueueWorker extends QueueWorkerBase {
+class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
   /**
    * The entity type manager.
@@ -127,14 +129,14 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase {
     // Download the image file if provided.
     $file_id = NULL;
     if (!empty($data['image_url'])) {
-//      $file_id = $this->downloadImage($data['image_url']);
+      $file_id = $this->downloadImage($data['image_url']);
     }
 
     // Determine body content.
     if (\Drupal::moduleHandler()->moduleExists('news_all_text')) {
       // If the 'News all text' submodule is enabled, attempt to fetch the full text.
       $full_text = \Drupal::service('news_all_text.full_text')->getFullText($data['url']);
-      $body_content = $full_text ? $full_text : $data['snippet'];
+      $body_content = $full_text ?: $data['snippet'];
     }
     else {
       $body_content = $data['snippet'];
@@ -149,7 +151,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase {
       'field_source' => $data['source'],
       'field_tags' => $term_ids,
       'body' => [
-        'value' => $data['description'] . "\n\n" . $body_content,
+        'value' => $body_content,
         'summary' => $data['description'],
         'format' => 'basic_html',
       ],
@@ -188,14 +190,16 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase {
   /**
    * Downloads an image from a URL and saves it as a file entity.
    *
-   * This function uses the injected file repository service and file system service
-   * to write the image data to the public file system.
+   * This function uses the injected file repository service and file system
+   * service to write the image data to the public file system.
    *
    * @param string $url
    *   The image URL.
    *
    * @return int|null
    *   The file entity ID or NULL on failure.
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   protected function downloadImage($url) {
     try {
@@ -203,11 +207,12 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase {
       if ($response->getStatusCode() == 200) {
         $data = $response->getBody()->getContents();
         $file_name = basename(parse_url($url, PHP_URL_PATH));
-        $destination = "public://news_images/{$file_name}";
+        $file_directory = 'public://news_images';
+        $destination = $file_directory . "/{$file_name}";
         // Ensure the destination directory exists.
-//        $this->fileSystem->prepareDirectory('public://news_images', FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+        $this->fileSystem->prepareDirectory($file_directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
         // Save the file using the file repository service.
-        $file = $this->fileRepository->writeData($data, $destination, FileSystemInterface::EXISTS_REPLACE);
+        $file = $this->fileRepository->writeData($data, $destination);
         if ($file) {
           $file->setPermanent();
           $file->save();

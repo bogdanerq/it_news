@@ -1,0 +1,4 @@
+services:
+  news_all_text.full_text:
+    class: 'Drupal\news_all_text\FullTextFetcher'
+    arguments: ['@http_client', '@logger.factory']

@@ -100,7 +100,7 @@ class NewsMakerApiFetcher {
     $api_url = 'https://api.thenewsapi.com/v1/news/all?' . http_build_query($query);
 
 
-    $data = (array) json_decode('{"meta":{"found":15341313,"returned":1,"limit":1,"page":1},"data":[{"uuid":"7ada4fb7-34e3-4262-85b8-f7dd19e913f4","title":"Footwear Finds: Loewe Ballet Runner 2.0","description":"Picture the perfect fusion of a 1970s running shoe and a ballet flat. What a covetable kick. And yet, it`s not imaginary, nor is it fantasy. It`s Loewe`s latest...","keywords":"","snippet":"Picture the perfect fusion of a 1970s running shoe and a ballet flat. What a covetable kick. And yet, it’s not imaginary, nor is it fantasy. It’s Loewe‘s ...","url":"https:\/\/10magazine.com\/footwear-finds-loewe-ballet-runner-2-0\/","image_url":"https:\/\/10magazine.com\/wp-content\/uploads\/2025\/02\/Loewe-FT.jpg","language":"en","published_at":"2025-02-12T12:38:36.000000Z","source":"10magazine.com","categories":[],"relevance_score":null}]}', TRUE);
+    $data = (array) json_decode('{"meta":{"found":15341313,"returned":1,"limit":1,"page":1},"data":[{"uuid":"7ada4fb7-34e3-4262-85b8-f7dd19e913f4","title":"Footwear Finds: Loewe Ballet Runner 2.0","description":"Picture the perfect fusion of a 1970s running shoe and a ballet flat. What a covetable kick. And yet, it`s not imaginary, nor is it fantasy. It`s Loewe`s latest...","keywords":"","snippet":"Picture the perfect fusion of a 1970s running shoe and a ballet flat. What a covetable kick. And yet, it’s not imaginary, nor is it fantasy. It’s Loewe‘s ...","url":"https:\/\/10magazine.com\/footwear-finds-loewe-ballet-runner-2-0\/","image_url":"https:\/\/10magazine.com\/wp-content\/uploads\/2025\/02\/Loewe-FT.jpg","language":"en","published_at":"2025-02-12T12:38:36.000000Z","source":"10magazine.com","categories":["tech"],"relevance_score":null}]}', TRUE);
 
     try {
 //      $response = $this->httpClient->request('GET', $api_url);
@@ -108,13 +108,11 @@ class NewsMakerApiFetcher {
 //        $data = json_decode($response->getBody(), TRUE);
         if (!empty($data['data']) && is_array($data['data'])) {
           $queue = $this->queueFactory->get('news_maker_api_queue_worker');
-          $num = $queue->numberOfItems();
           $queue->createQueue();
           foreach ($data['data'] as $news_item) {
             $queue->createItem($news_item);
           }
         }
-      $num = $queue->numberOfItems();
       //      }
     }
     catch (\Exception $e) {

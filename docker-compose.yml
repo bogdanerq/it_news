@@ -14,7 +14,8 @@ services:
       - db_data:/var/lib/mysql
 
   php:
-    image: drupal:10
+#    image: drupal:10
+    build: .
     user: "1000:1000"
     container_name: drupal-php
     restart: always
