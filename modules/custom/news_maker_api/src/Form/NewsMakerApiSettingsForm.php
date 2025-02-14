@@ -4,7 +4,6 @@ namespace Drupal\news_maker_api\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 
 /**
  * Configuration form for News Maker API.
@@ -37,7 +36,7 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
     $config = $this->config(static::SETTINGS);
 
     $form['api_key'] = [
-      '#type' => 'textfield',
+      '#type' => 'key_select',
       '#title' => $this->t('API Key'),
       '#default_value' => $config->get('api_key'),
       '#required' => TRUE,
@@ -130,8 +129,6 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
     $fetcher->fetchNews();
 
     $this->messenger()->addMessage($this->t('News items have been enqueued.'));
-    // Redirect back to the settings page.
-//    $form_state->setRedirectUrl(Url::fromRoute('news_maker_api.settings'));
   }
 
 }

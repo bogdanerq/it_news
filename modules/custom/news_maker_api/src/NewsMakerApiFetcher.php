@@ -3,6 +3,7 @@
 namespace Drupal\news_maker_api;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\key\KeyRepositoryInterface;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 use Drupal\Core\Queue\QueueFactory;
@@ -17,28 +18,35 @@ class NewsMakerApiFetcher {
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  protected $configFactory;
+  protected ConfigFactoryInterface $configFactory;
 
   /**
    * The HTTP client.
    *
    * @var \GuzzleHttp\ClientInterface
    */
-  protected $httpClient;
+  protected ClientInterface $httpClient;
 
   /**
    * The logger channel.
    *
    * @var \Psr\Log\LoggerInterface
    */
-  protected $logger;
+  protected LoggerInterface $logger;
 
   /**
    * The queue factory.
    *
    * @var \Drupal\Core\Queue\QueueFactory
    */
-  protected $queueFactory;
+  protected QueueFactory $queueFactory;
+
+  /**
+   * Key repository.
+   *
+   * @var \Drupal\key\KeyRepositoryInterface
+   */
+  protected KeyRepositoryInterface $keyRepository;
 
   /**
    * Constructs a new NewsMakerApiFetcher.
@@ -51,12 +59,15 @@ class NewsMakerApiFetcher {
    *   The logger channel.
    * @param \Drupal\Core\Queue\QueueFactory $queue_factory
    *   The queue factory.
+   * @param \Drupal\key\KeyRepositoryInterface $key_repository
+   *   The key repository.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ClientInterface $http_client, LoggerInterface $logger, QueueFactory $queue_factory) {
+  public function __construct(ConfigFactoryInterface $config_factory, ClientInterface $http_client, LoggerInterface $logger, QueueFactory $queue_factory, KeyRepositoryInterface $key_repository) {
     $this->configFactory = $config_factory;
     $this->httpClient = $http_client;
     $this->logger = $logger;
     $this->queueFactory = $queue_factory;
+    $this->keyRepository = $key_repository;
   }
 
   /**
@@ -64,10 +75,13 @@ class NewsMakerApiFetcher {
    */
   public function fetchNews() {
     $config = $this->configFactory->get('news_maker_api.settings');
-    $api_key = $config->get('api_key');
-    if (!$api_key) {
-      $this->logger->notice('API key is not configured.');
+
+    if (!$config->get('api_key')) {
+      $this->logger->notice('API key is not selected.');
       return;
+    }
+    else {
+      $api_key = $this->keyRepository->getKey($config->get('api_key'));
     }
     $language = $config->get('language');
     $keywords = $config->get('keywords');
@@ -77,9 +91,8 @@ class NewsMakerApiFetcher {
     $limit = $config->get('limit') ?: 3;
 
     $query = [
-      'api_token' => $api_key,
+      'api_token' => $api_key->getKeyValue(),
       'limit' => $limit,
-      'locale' => 'us', // You may make this configurable as needed.
     ];
     if ($language) {
       $query['language'] = $language;

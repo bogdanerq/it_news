@@ -1,0 +1,22 @@
+uuid: 774996af-c2be-4949-bebb-676f7b9fde33
+langcode: uk
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.category_news
+id: paragraph.category_news.status
+field_name: status
+entity_type: paragraph
+bundle: category_news
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

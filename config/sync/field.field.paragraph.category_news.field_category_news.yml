@@ -1,0 +1,30 @@
+uuid: ed5c4ea5-b663-4262-b798-ab20ac80d752
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_category_news
+    - paragraphs.paragraphs_type.category_news
+  module:
+    - viewsreference
+id: paragraph.category_news.field_category_news
+field_name: field_category_news
+entity_type: paragraph
+bundle: category_news
+label: 'Category news'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+  plugin_types:
+    block: block
+  preselect_views:
+    category_news: category_news
+  enabled_settings: {  }
+field_type: viewsreference

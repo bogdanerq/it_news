@@ -1,0 +1,18 @@
+uuid: 14a1e11d-82c1-4a21-80c7-e8b1dd113164
+langcode: uk
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.slider_news
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.slider_news
+target_entity_type_id: paragraph
+target_bundle: slider_news
+default_langcode: site_default
+language_alterable: false

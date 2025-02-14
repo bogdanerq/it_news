@@ -1,0 +1,27 @@
+uuid: 9361e979-e4c5-4fb1-8d2c-7feefc5d89a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.category_news.field_category_news
+    - paragraphs.paragraphs_type.category_news
+  module:
+    - viewsreference
+id: paragraph.category_news.default
+targetEntityType: paragraph
+bundle: category_news
+mode: default
+content:
+  field_category_news:
+    type: viewsreference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -38,28 +38,57 @@ class FullTextFetcher {
   }
 
   /**
-   * Gets the full text of the article at the given URL.
+   * Gets the full text of the news article for a given URL.
+   *
+   * This method fetches the HTML content of the article, then constructs a prompt
+   * instructing the AI to extract the main article text (removing extraneous content).
    *
    * @param string $url
-   *   URL article.
+   *   The URL of the news article.
    *
    * @return string
-   *   Full text of the article or an empty line on failure.
-   *
-   * @throws \GuzzleHttp\Exception\GuzzleException
+   *   The extracted full text of the news article, or an empty string on failure.
    */
-  public function getFullText($url) {
+  public function getFullText(string $url): string {
+    // Fetch the HTML content.
     try {
-      $response = $this->httpClient->request('GET', $url);
-      if ($response->getStatusCode() == 200) {
-        $html = (string) $response->getBody();
-        // Simplified: remove HTML tags.
-        return strip_tags($html);
-      }
+      // For simplicity, we use file_get_contents here. In production, use a proper HTTP client.
+      $html = file_get_contents($url);
     }
     catch (\Exception $e) {
-      $this->logger->error($e->getMessage());
+      $this->logger->error('Error fetching URL @url: @message', [
+        '@url' => $url,
+        '@message' => $e->getMessage(),
+      ]);
+      return '';
     }
+
+    // Build the prompt for the AI.
+    $prompt = "Extract the full text of the news article from the following HTML content. Remove all extraneous elements (navigation, ads, styles) and return only the main article text:\n\n" . $html;
+
+    // Get the default AI engine.
+    try {
+      /** @var  \Drupal\ai\AiProviderPluginManager $service */
+      $service = \Drupal::service('ai.provider');
+
+      if (!$service->hasProvidersForOperationType('chat', TRUE)) {
+        $this->logger->error('Sorry, no provider exists for Chat, install one first');
+        return '';
+      }
+
+//      @todo
+//        $engine = $service->;
+//      if (!$engine) {
+//        $this->logger->error('No default AI engine configured.');
+//        return '';
+//      }
+
+    }
+    catch (\Exception $e) {
+      $this->logger->error('Error calling AI engine: @message', ['@message' => $e->getMessage()]);
+    }
+
     return '';
   }
+
 }

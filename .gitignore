@@ -65,3 +65,6 @@ sites/simpletest
 .idea
 *.sql
 *.gz
+
+#todo Push cannot contain secrets error
+config/sync/key.key.ai_key.yml

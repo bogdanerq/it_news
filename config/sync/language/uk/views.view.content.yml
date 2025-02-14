@@ -1,14 +1,31 @@
+label: Вміст
 display:
   default:
     display_title: Базово
     display_options:
+      title: Вміст
       fields:
         title:
           label: Заголовок
+        type:
+          separator: ', '
         status:
           label: Стан
+        langcode:
+          separator: ', '
         operations:
           label: Операції
+      pager:
+        options:
+          tags:
+            first: '« Перша'
+            last: 'Остання »'
+      exposed_form:
+        options:
+          reset_button_label: Скинути
+          exposed_sorts_label: 'Впорядкувати за'
+          sort_asc_label: Зрост
+          sort_desc_label: Спад
       filters:
         title:
           expose:
@@ -16,3 +33,10 @@ display:
         status:
           expose:
             label: Стан
+  page_1:
+    display_title: Сторінка
+    display_options:
+      menu:
+        title: Вміст
+      tab_options:
+        title: Вміст

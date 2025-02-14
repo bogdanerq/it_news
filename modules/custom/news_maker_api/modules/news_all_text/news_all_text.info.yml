@@ -1,8 +1,9 @@
 name: 'News all text'
 type: module
-description: 'A submodule that receives the full text of the news (instead of a snippet) and inserts it into the body.'
+description: 'Submodule to fetch full news text using the Drupal AI module.'
 core_version_requirement: ^10 || ^11
 package: Custom
 
 dependencies:
   - drupal:news_maker_api
+  - drupal:ai

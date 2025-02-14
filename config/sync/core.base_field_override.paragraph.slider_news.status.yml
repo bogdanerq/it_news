@@ -1,0 +1,22 @@
+uuid: 11cd2dfe-b2bb-4bf6-93df-6e6eb28c2323
+langcode: uk
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.slider_news
+id: paragraph.slider_news.status
+field_name: status
+entity_type: paragraph
+bundle: slider_news
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

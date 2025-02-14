@@ -4,6 +4,8 @@ module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
   advanced_language_selector: 0
+  ai: 0
+  ai_provider_openai: 0
   announcements_feed: 0
   automated_cron: 0
   big_pipe: 0
@@ -29,12 +31,14 @@ module:
   help: 0
   history: 0
   image: 0
+  key: 0
   language: 0
   link: 0
   locale: 0
   menu_link_content: 0
   menu_ui: 0
   mysql: 0
+  news_all_text: 0
   news_maker_api: 0
   node: 0
   options: 0

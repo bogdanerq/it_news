@@ -29,35 +29,35 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * The file repository service.
    *
    * @var \Drupal\File\FileRepositoryInterface
    */
-  protected $fileRepository;
+  protected FileRepositoryInterface $fileRepository;
 
   /**
    * The HTTP client service.
    *
    * @var \GuzzleHttp\ClientInterface
    */
-  protected $httpClient;
+  protected ClientInterface $httpClient;
 
   /**
    * The logger channel.
    *
    * @var \Psr\Log\LoggerInterface
    */
-  protected $logger;
+  protected LoggerInterface $logger;
 
   /**
    * The file system service.
    *
    * @var \Drupal\Core\File\FileSystemInterface
    */
-  protected $fileSystem;
+  protected FileSystemInterface $fileSystem;
 
   /**
    * Constructs a new NewsMakerApiQueueWorker.
@@ -146,6 +146,8 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
     $node = Node::create([
       'type' => 'article',
       'title' => $data['title'],
+// @todo
+//      'created' => $data['published_at'],
       'field_uuid' => $data['uuid'],
       'field_link' => ['uri' => $data['url']],
       'field_source' => $data['source'],
@@ -201,7 +203,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  protected function downloadImage($url) {
+  protected function downloadImage(string $url) {
     try {
       $response = $this->httpClient->request('GET', $url, ['stream' => TRUE]);
       if ($response->getStatusCode() == 200) {

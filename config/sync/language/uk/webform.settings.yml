@@ -1,2 +1,4 @@
 settings:
+  default_submit_button_label: Надіслати
+  default_reset_button_label: Скинути
   default_delete_button_label: Видалити

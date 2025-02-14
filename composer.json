@@ -50,6 +50,7 @@
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
+            "php-http/discovery": true,
             "phpstan/extension-installer": true,
             "wikimedia/composer-merge-plugin": true
         },
@@ -101,7 +102,8 @@
         "merge-plugin": {
             "include": [
                 "modules/contrib/views_slideshow/composer.libraries.json",
-                "modules/contrib/views_slideshow/modules/views_slideshow_cycle/composer.libraries.json"
+                "modules/contrib/views_slideshow/modules/views_slideshow_cycle/composer.libraries.json",
+                "modules/custom/news_maker_api/modules/news_all_text/composer.json"
             ],
             "merge-extra": true,
             "merge-extra-deep": true,

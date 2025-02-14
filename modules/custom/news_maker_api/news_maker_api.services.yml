@@ -1,4 +1,4 @@
 services:
   news_maker_api.fetcher:
     class: Drupal\news_maker_api\NewsMakerApiFetcher
-    arguments: ['@config.factory', '@http_client', '@logger.channel.php', '@queue']
+    arguments: ['@config.factory', '@http_client', '@logger.channel.php', '@queue', '@key.repository']
