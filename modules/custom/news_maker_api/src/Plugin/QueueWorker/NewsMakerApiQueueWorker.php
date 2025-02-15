@@ -3,6 +3,7 @@
 namespace Drupal\news_maker_api\Plugin\QueueWorker;
 
 use Drupal\Core\Annotation\QueueWorker;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\node\Entity\Node;
@@ -60,6 +61,13 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
   protected FileSystemInterface $fileSystem;
 
   /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected ModuleHandlerInterface $moduleHandler;
+
+  /**
    * Constructs a new NewsMakerApiQueueWorker.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -73,7 +81,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   The file system service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, FileRepositoryInterface $file_repository, ClientInterface $http_client, LoggerInterface $logger, FileSystemInterface $file_system) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, FileRepositoryInterface $file_repository, ClientInterface $http_client, LoggerInterface $logger, FileSystemInterface $file_system, ModuleHandlerInterface $module_handler) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->entityTypeManager = $entity_type_manager;
@@ -81,6 +89,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
     $this->httpClient = $http_client;
     $this->logger = $logger;
     $this->fileSystem = $file_system;
+    $this->moduleHandler = $module_handler;
   }
 
   /**
@@ -95,7 +104,8 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
       $container->get('file.repository'),
       $container->get('http_client'),
       $container->get('logger.factory')->get('news_maker_api'),
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('module_handler')
     );
   }
 
@@ -133,9 +143,11 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
     }
 
     // Determine body content.
-    if (\Drupal::moduleHandler()->moduleExists('news_all_text')) {
+    if ($this->moduleHandler->moduleExists('news_all_text')) {
       // If the 'News all text' submodule is enabled, attempt to fetch the full text.
-      $full_text = \Drupal::service('news_all_text.full_text')->getFullText($data['url']);
+      /** @var \Drupal\news_all_text\FullTextFetcher $sub_service */
+      $sub_service = \Drupal::service('news_all_text.full_text');
+      $full_text = $sub_service->getFullText($data['url']);
       $body_content = $full_text ?: $data['snippet'];
     }
     else {
@@ -146,8 +158,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
     $node = Node::create([
       'type' => 'article',
       'title' => $data['title'],
-// @todo
-//      'created' => $data['published_at'],
+      'created' => strtotime($data['published_at']),
       'field_uuid' => $data['uuid'],
       'field_link' => ['uri' => $data['url']],
       'field_source' => $data['source'],

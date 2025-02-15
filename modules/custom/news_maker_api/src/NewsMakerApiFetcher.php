@@ -112,7 +112,7 @@ class NewsMakerApiFetcher {
 
     $api_url = 'https://api.thenewsapi.com/v1/news/all?' . http_build_query($query);
 
-
+    // @todo delete and uncomment response after tests
     $data = (array) json_decode('{"meta":{"found":15341313,"returned":1,"limit":1,"page":1},"data":[{"uuid":"7ada4fb7-34e3-4262-85b8-f7dd19e913f4","title":"Footwear Finds: Loewe Ballet Runner 2.0","description":"Picture the perfect fusion of a 1970s running shoe and a ballet flat. What a covetable kick. And yet, it`s not imaginary, nor is it fantasy. It`s Loewe`s latest...","keywords":"","snippet":"Picture the perfect fusion of a 1970s running shoe and a ballet flat. What a covetable kick. And yet, it’s not imaginary, nor is it fantasy. It’s Loewe‘s ...","url":"https:\/\/10magazine.com\/footwear-finds-loewe-ballet-runner-2-0\/","image_url":"https:\/\/10magazine.com\/wp-content\/uploads\/2025\/02\/Loewe-FT.jpg","language":"en","published_at":"2025-02-12T12:38:36.000000Z","source":"10magazine.com","categories":["tech"],"relevance_score":null}]}', TRUE);
 
     try {

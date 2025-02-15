@@ -2,6 +2,8 @@
 
 namespace Drupal\news_all_text;
 
+use Drupal\ai\OperationType\Chat\ChatInput;
+use Drupal\ai\OperationType\Chat\ChatMessage;
 use GuzzleHttp\ClientInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
@@ -68,16 +70,30 @@ class FullTextFetcher {
 
     // Get the default AI engine.
     try {
-      /** @var  \Drupal\ai\AiProviderPluginManager $service */
-      $service = \Drupal::service('ai.provider');
+      /** @var  \Drupal\ai\AiProviderPluginManager $ai_provider */
+      $ai_provider = \Drupal::service('ai.provider');
 
-      if (!$service->hasProvidersForOperationType('chat', TRUE)) {
+      if (!$ai_provider->hasProvidersForOperationType('chat', TRUE)) {
         $this->logger->error('Sorry, no provider exists for Chat, install one first');
         return '';
       }
 
+      $default = $ai_provider->getDefaultProviderForOperationType('chat');
+
+      $messages = new ChatInput([
+        new ChatMessage('user', 'Hello!'),
+      ]);
+      /** @var \Drupal\ai\OperationType\Chat\ChatInterface $provider */
+      $provider = $ai_provider->createInstance($default['provider_id']);
+      // @todo 'Too Many Requests' error
+      $response = $provider->chat($messages, $default['model_id'], ['news_all_text']);
+      /** @var \Drupal\ai\OperationType\Chat\ChatMessage $return_message */
+      $return_message = $response->getNormalized();
+      $text = $return_message->getText();
+//      return $text;
+
 //      @todo
-//        $engine = $service->;
+//        $engine = $ai_provider->;
 //      if (!$engine) {
 //        $this->logger->error('No default AI engine configured.');
 //        return '';
