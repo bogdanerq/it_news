@@ -1,3 +1,5 @@
 display:
   default:
     display_title: Базово
+  block_1:
+    display_title: Блок

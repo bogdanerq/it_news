@@ -1,5 +1,6 @@
 display:
   default:
+    display_title: Головне
     display_options:
       exposed_form:
         options:
@@ -31,6 +32,10 @@ display:
           separator: ', '
         view_webform_submission:
           label: Операції
+      arguments:
+        in_draft:
+          exception:
+            title: Все
   embed_administer:
     display_options:
       fields:
@@ -48,6 +53,7 @@ display:
           label: Створено
           separator: ', '
         completed:
+          label: Завершено
           separator: ', '
         remote_addr:
           separator: ', '
@@ -70,6 +76,7 @@ display:
           label: Створено
           separator: ', '
         completed:
+          label: Завершено
           separator: ', '
         remote_addr:
           separator: ', '
@@ -92,6 +99,7 @@ display:
           label: Створено
           separator: ', '
         completed:
+          label: Завершено
           separator: ', '
         remote_addr:
           separator: ', '

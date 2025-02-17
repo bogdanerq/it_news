@@ -21,16 +21,26 @@ display:
           separator: ', '
       pager:
         options:
+          tags:
+            next: 'наступна ›'
+            previous: '‹ попередня'
+            first: '« перша'
+            last: 'остання »'
           expose:
             items_per_page_label: 'Елементів на сторінку'
             items_per_page_options_all_label: '- Усе -'
             offset_label: Зміщення
       exposed_form:
         options:
+          submit_button: Фільтр
           reset_button_label: Скинути
           exposed_sorts_label: 'Впорядкувати за'
           sort_asc_label: Зрост
           sort_desc_label: Спад
+      filters:
+        langcode:
+          expose:
+            label: Мова
   page_unapproved:
     display_options:
       fields:
@@ -50,3 +60,7 @@ display:
           label: Операції
         name_1:
           separator: ', '
+      filters:
+        langcode:
+          expose:
+            label: Мова

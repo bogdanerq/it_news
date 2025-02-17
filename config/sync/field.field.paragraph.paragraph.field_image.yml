@@ -1,23 +1,21 @@
-uuid: 614aa925-dc3f-4f4f-8292-d55ea44f0902
+uuid: 6a314fee-4769-48ec-a670-7c60816d77e7
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image
-    - node.type.article
+    - field.storage.paragraph.field_image
+    - paragraphs.paragraphs_type.paragraph
   module:
     - image
     - tmgmt_content
 third_party_settings:
   tmgmt_content:
     excluded: false
-_core:
-  default_config_hash: j0riO_-77ZFWNLtj0iJ31HnohiNjdn8HUL86RueCF-M
-id: node.article.field_image
+id: paragraph.paragraph.field_image
 field_name: field_image
-entity_type: node
-bundle: article
-label: Image
+entity_type: paragraph
+bundle: paragraph
+label: image
 description: ''
 required: false
 translatable: false
@@ -26,13 +24,13 @@ default_value_callback: ''
 settings:
   handler: 'default:file'
   handler_settings: {  }
-  file_directory: news-posters
+  file_directory: paragraph_image
   file_extensions: 'png gif jpg jpeg webp svg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
   alt_field: false
-  alt_field_required: false
+  alt_field_required: true
   title_field: false
   title_field_required: false
   default_image:

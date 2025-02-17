@@ -5,6 +5,8 @@ display:
       pager:
         options:
           tags:
+            next: 'Наступна ›'
+            previous: '‹ Попередня'
             first: '« Перша'
             last: 'Остання »'
           expose:

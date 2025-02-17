@@ -29,6 +29,8 @@
         "drupal/pathauto": "^1.13",
         "drupal/queue_ui": "^3.2",
         "drupal/taxonomy_menu": "^3.7",
+        "drupal/tmgmt": "^1.17",
+        "drupal/tmgmt_google": "^1.2",
         "drupal/ultimate_cron": "^2.0@beta",
         "drupal/views_field_view": "^1.0@beta",
         "drupal/views_slideshow": "^5.0",

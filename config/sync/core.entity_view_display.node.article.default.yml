@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.article.field_source
     - field.field.node.article.field_tags
     - field.field.node.article.field_uuid
-    - image.style.wide
     - node.type.article
   module:
     - comment
@@ -53,9 +52,9 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: wide
+      image_style: ''
       image_loading:
-        attribute: eager
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content

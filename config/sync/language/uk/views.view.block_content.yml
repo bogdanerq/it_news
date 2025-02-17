@@ -11,6 +11,9 @@ display:
           label: Операції
       pager:
         options:
+          tags:
+            next: 'Наступна ›'
+            previous: '‹ Попередня'
           expose:
             items_per_page_label: 'Елементів на сторінку'
             items_per_page_options_all_label: '- Усе -'

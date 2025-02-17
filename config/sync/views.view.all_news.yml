@@ -620,7 +620,7 @@ display:
     display_plugin: block
     position: 2
     display_options:
-      title: 'Newest News'
+      title: ''
       fields:
         title:
           id: title
@@ -899,6 +899,7 @@ display:
         filter_groups: false
       rendering_language: '***LANGUAGE_language_interface***'
       display_extenders: {  }
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
