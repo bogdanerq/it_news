@@ -22,11 +22,11 @@ a {
 }
 
 .bg-inverse {
-    background: $primary-shade !important;
+    background: $primary-shade;
 }
 
 .site-footer {
-    background: $primary-shade !important;
+    background: var(--bs-secondary);
 }
 
 .site-name-slogan a {
@@ -51,9 +51,30 @@ a {
     margin: 0 15px;
 }
 
+.navbar-brand {
+  text-align: center;
+  display: contents;
+  img {
+    padding: 0 15px 10px 0;
+  }
+}
 
-//.site-footer {
-//  position: absolute;
-//  bottom: 0;
-//  width: 100%;
-//}
+.menu--account {
+  .nav {
+    margin: 0 1rem;
+    &-link {
+      color: $light;
+    }
+  }
+}
+
+
+// footer stick to bottom
+#page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.site-footer {
+  margin-top: auto;
+}

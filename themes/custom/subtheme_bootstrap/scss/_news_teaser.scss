@@ -1,0 +1,59 @@
+@import "variables";
+@import "typography";
+@import "mixins";
+
+.node--view-mode-teaser {
+  margin-bottom: 2rem;
+
+  .top_content {
+    display: flow-root;
+
+    .node__title {
+      font-size: $h1-font-size;
+      font-weight: $font-weight-bold;
+      margin-top: -5px;
+    }
+
+    .image {
+      width: 35%;
+      float: left;
+      margin: 0 1rem 0 0;
+
+      img {
+        margin: 0;
+        height: 156px;
+        object-fit: cover;
+        max-width: 100%;
+      }
+    }
+
+    .category {
+      display: inline-block;
+      .field--name-field-tags {
+        margin: 0;
+      }
+      @include category;
+    }
+  }
+
+  h2 {
+    padding: 0;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .top_content {
+
+      .image, .field--name-field-image {
+        width: 100%;
+
+        img {
+          margin: 0 0 1rem;
+          height: auto;
+          width: 100%;
+        }
+      }
+
+    }
+  }
+
+}

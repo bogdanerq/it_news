@@ -11,7 +11,7 @@ dependencies:
     - field.field.node.article.field_source
     - field.field.node.article.field_tags
     - field.field.node.article.field_uuid
-    - image.style.medium
+    - image.style.small_news
     - node.type.article
   module:
     - image
@@ -28,24 +28,17 @@ content:
     label: hidden
     settings:
       image_link: content
-      image_style: medium
+      image_style: small_news
       image_loading:
         attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
-  field_source:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
 hidden:
   body: true
   comment: true
   field_link: true
+  field_source: true
   field_tags: true
   field_uuid: true
   langcode: true

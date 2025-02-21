@@ -12,8 +12,8 @@ _core:
   default_config_hash: l0XK37bjQPruJ3t1INI_8PRP8ZLix1utVK3ge7oYdE8
 id: subtheme_bootstrap_account_menu
 theme: subtheme_bootstrap
-region: secondary_menu
-weight: -6
+region: header
+weight: -5
 provider: null
 plugin: 'system_menu_block:account'
 settings:

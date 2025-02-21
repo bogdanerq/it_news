@@ -11,7 +11,7 @@ dependencies:
     - field.field.node.article.field_source
     - field.field.node.article.field_tags
     - field.field.node.article.field_uuid
-    - image.style.medium
+    - image.style.large
     - node.type.article
   module:
     - image
@@ -28,33 +28,28 @@ content:
     type: text_summary_or_trimmed
     label: hidden
     settings:
-      trim_length: 800
+      trim_length: 600
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_image:
     type: image
     label: hidden
     settings:
       image_link: content
-      image_style: medium
+      image_style: large
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: -1
+    weight: 0
     region: content
   field_tags:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    weight: 10
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
+    weight: 2
     region: content
 hidden:
   comment: true
@@ -62,3 +57,4 @@ hidden:
   field_source: true
   field_uuid: true
   langcode: true
+  links: true

@@ -54,3 +54,10 @@ $enable-gradients: false;
 // Breadcrumbs (Works only on Bootstrap 5+)
 // $breadcrumb-divider: quote(">");
 $enable-caret: true;
+
+// Tabs colors
+$categories: var(--bs-secondary);
+$categories-text: $white;
+
+// field space
+$bottom-space: 0 0 1rem;

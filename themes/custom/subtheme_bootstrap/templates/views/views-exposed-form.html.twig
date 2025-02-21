@@ -25,6 +25,7 @@
   {% set form = form|merge({'sort_by': null}) %}
 {% endif %}
 
-<div class="d-flex flex-wrap">
+{# filters used only for all_news view #}
+<div class="views-exposed-form">
   {{ form }}
 </div>

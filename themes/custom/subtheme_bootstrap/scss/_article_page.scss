@@ -1,16 +1,27 @@
-.node--type-article {
+@import "variables";
+@import "typography";
+@import "mixins";
+
+body.node--type-article {
+  .field {
+    margin: $bottom-space;
+  }
+
   .field--name-field-image {
     float: none;
 
     img {
       width: 100%;
       height: auto;
+      margin: 0;
     }
   }
 
   .field--name-field-tags {
-    .field__label {
-      font-size: 1.5rem;
-    }
+    @include category;
+  }
+
+  .field--name-comment {
+    margin-top: 30px;
   }
 }

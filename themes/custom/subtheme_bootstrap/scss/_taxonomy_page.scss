@@ -1,0 +1,23 @@
+@import "variables";
+@import "typography";
+
+.page-view-taxonomy-term {
+  .field {
+    margin: $bottom-space;
+  }
+
+  .field--name-field-taxonomy-poster {
+    img {
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+  }
+
+  .feed-icons {
+    display: flex;
+    justify-content: flex-end;
+    margin: $bottom-space;
+  }
+
+}

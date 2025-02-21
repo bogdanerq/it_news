@@ -1,0 +1,15 @@
+uuid: ef485f03-1e32-4e97-9ec2-c43c881856fd
+langcode: en
+status: true
+dependencies: {  }
+name: small_news
+label: 'small_news (340×340)'
+effects:
+  04ff8821-d85b-4435-ac40-a57acc924f82:
+    uuid: 04ff8821-d85b-4435-ac40-a57acc924f82
+    id: image_scale
+    weight: 2
+    data:
+      width: 340
+      height: 280
+      upscale: true

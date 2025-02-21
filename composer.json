@@ -19,6 +19,7 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.5",
         "drupal/advanced_language_selector": "^1.5",
+        "drupal/better_exposed_filters": "^7.0",
         "drupal/bootstrap": "^5.0",
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",

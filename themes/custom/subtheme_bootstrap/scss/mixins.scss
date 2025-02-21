@@ -1,0 +1,22 @@
+@import "variables";
+@import "typography";
+
+@mixin category {
+  .field__label {
+    font-size: $font-size-lg;
+    margin-bottom: 10px;
+  }
+  .links {
+    li {
+      margin-bottom: 10px;
+    }
+
+    a {
+      background-color: $categories;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: $font-size-base;
+      color: $categories-text;
+    }
+  }
+}
