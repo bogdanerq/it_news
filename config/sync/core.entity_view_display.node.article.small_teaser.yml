@@ -11,10 +11,10 @@ dependencies:
     - field.field.node.article.field_source
     - field.field.node.article.field_tags
     - field.field.node.article.field_uuid
-    - image.style.small_news
     - node.type.article
   module:
     - image
+    - text
     - user
 _core:
   default_config_hash: br6izr-iGEu--JvNbCJNtOBpRnxpFLXfoV5y61U9Nqc
@@ -23,19 +23,26 @@ targetEntityType: node
 bundle: article
 mode: small_teaser
 content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 320
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_image:
     type: image
     label: hidden
     settings:
       image_link: content
-      image_style: small_news
+      image_style: ''
       image_loading:
         attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
-  body: true
   comment: true
   field_link: true
   field_source: true

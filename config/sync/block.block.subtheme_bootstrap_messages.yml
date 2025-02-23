@@ -11,7 +11,7 @@ _core:
 id: subtheme_bootstrap_messages
 theme: subtheme_bootstrap
 region: highlighted
-weight: -6
+weight: -7
 provider: null
 plugin: system_messages_block
 settings:

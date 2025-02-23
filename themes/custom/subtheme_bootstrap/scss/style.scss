@@ -26,7 +26,8 @@ a {
 }
 
 .site-footer {
-    background: var(--bs-secondary);
+    //background: var(--bs-secondary);
+    background: $primary;
 }
 
 .site-name-slogan a {
@@ -60,14 +61,41 @@ a {
 }
 
 .menu--account {
+  padding: 0;
+
   .nav {
-    margin: 0 1rem;
     &-link {
-      color: $light;
+      color: $white;
     }
   }
 }
 
+.menu--main {
+  .nav-link {
+    color: $white;
+  }
+  .dropdown-item {
+    a {
+      color: inherit;
+    }
+  }
+}
+
+.featured-top {
+  background: $secondary;
+  margin-bottom: 1rem;
+
+  .region-featured-top {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .block {
+      width: auto;
+    }
+  }
+}
 
 // footer stick to bottom
 #page {
@@ -77,4 +105,80 @@ a {
 }
 .site-footer {
   margin-top: auto;
+  color: $white;
+
+  a {
+    color: $white;
+  }
+}
+
+.path-frontpage {
+  .paragraph--type--paragraph {
+    margin: 1rem 0;
+  }
+
+  .field__item:nth-child(2n+4) {
+    .paragraph--type--paragraph {
+      .field--name-field-image {
+        float: right;
+        margin: 0 0 0 1rem;
+      }
+    }
+  }
+}
+
+// Dark-mood
+html.dark {
+  #page {
+    background-color: $dark;
+    color: $light;
+
+    .field--name-created {
+      .datetime {
+        color: $light;
+      }
+    }
+
+    .views-field-name,
+    .comment__author,
+    .comment-add,
+    .breadcrumb,
+    .node__title {
+      a {
+        color: $light;
+      }
+    }
+    .breadcrumb-item::before {
+      color: $light;
+    }
+
+    .node--view-mode-small-teaser .small_teaser_block_content {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .views-slideshow-controls-bottom .views-slideshow-pager-bullets li {
+      background: #aaa;
+
+      &.active {
+        background: $light;
+      }
+    }
+
+    .webform-progress-tracker {
+      .progress-title {
+        color: $light;
+      }
+
+      .progress-step.is-complete .progress-marker {
+        &::before, &::after {
+          background-color: #121212;
+        }
+      }
+    }
+
+    // comment textarea fix
+    .form-textarea-wrapper {
+      color: $black;
+    }
+  }
 }

@@ -25,6 +25,7 @@
         "drupal/core-project-message": "^10.0",
         "drupal/core-recommended": "^10.0",
         "drupal/core-vendor-hardening": "^10.0",
+        "drupal/dark_mode_toggle": "^1.0",
         "drupal/date_popup": "^2.0",
         "drupal/paragraphs": "^1.18",
         "drupal/pathauto": "^1.13",

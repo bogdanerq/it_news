@@ -11,7 +11,7 @@ _core:
 id: subtheme_bootstrap_site_branding
 theme: subtheme_bootstrap
 region: header
-weight: -6
+weight: -7
 provider: null
 plugin: system_branding_block
 settings:

@@ -1,0 +1,41 @@
+@import "variables";
+@import "typography";
+@import "mixins";
+
+.node--view-mode-small-teaser {
+
+  .image {
+    .field--name-field-image {
+      float: none;
+      margin: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 36rem;
+      margin: 0;
+      object-fit: cover;
+    }
+  }
+
+  .node__title {
+    font-size: $h1-font-size;
+    font-weight: $font-weight-bold;
+
+    a {
+      color: $text-black;
+    }
+  }
+
+
+  .small_teaser_block_content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, .7);
+    text-align: left;
+    padding: 10px;
+    z-index: 1;
+  }
+}

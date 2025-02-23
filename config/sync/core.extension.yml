@@ -19,6 +19,7 @@ module:
   config_translation: 0
   contact: 0
   contextual: 0
+  dark_mode_toggle: 0
   date_popup: 0
   datetime: 0
   dblog: 0

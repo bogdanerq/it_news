@@ -1,0 +1,20 @@
+uuid: 6672e279-6773-460e-a86a-9fa4b493c043
+langcode: en
+status: true
+dependencies:
+  module:
+    - dark_mode_toggle
+  theme:
+    - subtheme_bootstrap
+id: subtheme_bootstrap_darkmodetoggle
+theme: subtheme_bootstrap
+region: featured_top
+weight: -5
+provider: null
+plugin: dark_mode_toggle
+settings:
+  id: dark_mode_toggle
+  label: 'Dark Mode Toggle'
+  label_display: '0'
+  provider: dark_mode_toggle
+visibility: {  }

@@ -1,0 +1,46 @@
+@import "variables";
+@import "typography";
+@import "mixins";
+
+.block-dark-mode-toggle {
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dark-mode-toggle__button__system {
+    display: none;
+  }
+
+  .dark-mode-toggle__button__light,
+  .dark-mode-toggle__button__dark {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    text-indent: -9999px;
+    background-color: inherit;
+  }
+
+  .dark-mode-toggle__button__dark {
+    background-image: url('/themes/custom/subtheme_bootstrap/images/half-moon.png');
+  }
+
+  .dark-mode-toggle__button__light {
+    background-image: url('/themes/custom/subtheme_bootstrap/images/weather.png');
+  }
+}
+
+// Button replacement depending on the mode
+html.dark .dark-mode-toggle__button__dark {
+  display: none;
+}
+
+html:not(.dark) .dark-mode-toggle__button__light {
+  display: none;
+}
+

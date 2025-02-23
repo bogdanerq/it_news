@@ -74,29 +74,33 @@
 %}
 <article{{ attributes.addClass(classes) }}>
   {% if content.field_image %}
-    {{ content.field_image }}
+    <div class="image">
+      {{ content.field_image }}
+    </div>
   {% endif %}
-  <header>
-    {{ title_prefix }}
-    {% if label and not page %}
-      <h2{{ title_attributes.addClass('node__title') }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-    {% endif %}
-    {{ title_suffix }}
-    {% if display_submitted %}
-      <div class="node__meta">
-        {{ author_picture }}
-        {% block submitted %}
-          <em{{ author_attributes }}>
-            {{ date }}
-          </em>
-        {% endblock %}
-        {{ metadata }}
-      </div>
-    {% endif %}
-  </header>
-  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ content | without(content.field_image) }}
+  <div class="small_teaser_block_content">
+    <header>
+      {{ title_prefix }}
+      {% if label and not page %}
+        <h2{{ title_attributes.addClass('node__title') }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+      {% endif %}
+      {{ title_suffix }}
+      {% if display_submitted %}
+        <div class="node__meta">
+          {{ author_picture }}
+          {% block submitted %}
+            <em{{ author_attributes }}>
+              {{ date }}
+            </em>
+          {% endblock %}
+          {{ metadata }}
+        </div>
+      {% endif %}
+    </header>
+    <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+      {{ content | without(content.field_image) }}
+    </div>
   </div>
 </article>
