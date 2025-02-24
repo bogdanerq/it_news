@@ -19,6 +19,7 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.5",
         "drupal/advanced_language_selector": "^1.5",
+        "drupal/auto_translation": "^1.2",
         "drupal/better_exposed_filters": "^7.0",
         "drupal/bootstrap": "^5.0",
         "drupal/core-composer-scaffold": "^10.0",
@@ -27,6 +28,7 @@
         "drupal/core-vendor-hardening": "^10.0",
         "drupal/dark_mode_toggle": "^1.0",
         "drupal/date_popup": "^2.0",
+        "drupal/key": "^1.19",
         "drupal/paragraphs": "^1.18",
         "drupal/pathauto": "^1.13",
         "drupal/queue_ui": "^3.2",
@@ -106,8 +108,7 @@
         "merge-plugin": {
             "include": [
                 "modules/contrib/views_slideshow/composer.libraries.json",
-                "modules/contrib/views_slideshow/modules/views_slideshow_cycle/composer.libraries.json",
-                "modules/custom/news_maker_api/modules/news_all_text/composer.json"
+                "modules/contrib/views_slideshow/modules/views_slideshow_cycle/composer.libraries.json"
             ],
             "merge-extra": true,
             "merge-extra-deep": true,

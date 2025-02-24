@@ -7,10 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.paragraph
   module:
     - image
-    - tmgmt_content
-third_party_settings:
-  tmgmt_content:
-    excluded: false
 id: paragraph.paragraph.field_image
 field_name: field_image
 entity_type: paragraph

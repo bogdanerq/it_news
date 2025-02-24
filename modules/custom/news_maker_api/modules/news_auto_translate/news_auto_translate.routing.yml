@@ -1,0 +1,7 @@
+news_auto_translate.settings:
+  path: '/admin/config/news-maker-api/news-auto-translate'
+  defaults:
+    _form: '\Drupal\news_auto_translate\Form\SettingsForm'
+    _title: 'News Auto Translate settings'
+  requirements:
+    _permission: 'administer site configuration'

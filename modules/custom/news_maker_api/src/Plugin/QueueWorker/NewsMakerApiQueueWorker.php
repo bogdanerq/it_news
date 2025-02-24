@@ -6,6 +6,7 @@ use Drupal\Core\Annotation\QueueWorker;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
+use Drupal\news_maker_api\Events\NewsMakerApiEvents;
 use Drupal\node\Entity\Node;
 use Psr\Log\LoggerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -13,6 +14,8 @@ use Drupal\File\FileRepositoryInterface;
 use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Processes news items retrieved from the News Maker API.
@@ -68,6 +71,13 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
   protected ModuleHandlerInterface $moduleHandler;
 
   /**
+   * The event dispatcher.
+   *
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected EventDispatcherInterface $eventDispatcher;
+
+  /**
    * Constructs a new NewsMakerApiQueueWorker.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -81,7 +91,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   The file system service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, FileRepositoryInterface $file_repository, ClientInterface $http_client, LoggerInterface $logger, FileSystemInterface $file_system, ModuleHandlerInterface $module_handler) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, FileRepositoryInterface $file_repository, ClientInterface $http_client, LoggerInterface $logger, FileSystemInterface $file_system, ModuleHandlerInterface $module_handler, EventDispatcherInterface $event_dispatcher) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->entityTypeManager = $entity_type_manager;
@@ -90,6 +100,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
     $this->logger = $logger;
     $this->fileSystem = $file_system;
     $this->moduleHandler = $module_handler;
+    $this->eventDispatcher = $event_dispatcher;
   }
 
   /**
@@ -105,7 +116,8 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
       $container->get('http_client'),
       $container->get('logger.factory')->get('news_maker_api'),
       $container->get('file_system'),
-      $container->get('module_handler')
+      $container->get('module_handler'),
+      $container->get('event_dispatcher')
     );
   }
 
@@ -114,6 +126,11 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
    *
    * @param array $data
    *   An associative array containing the news data.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function processItem($data) {
     // Check if a node with the same UUID already exists.
@@ -173,6 +190,10 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
       $node->set('field_image', ['target_id' => $file_id]);
     }
     $node->save();
+
+    // Event for translate by news_auto_translate
+    $event = new GenericEvent($node);
+    $this->eventDispatcher->dispatch($event, NewsMakerApiEvents::NEWS_CREATED);
   }
 
   /**
@@ -183,6 +204,10 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
    *
    * @return \Drupal\Core\Entity\EntityInterface|null
    *   The taxonomy term entity or NULL on failure.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function getOrCreateTerm($name) {
     $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadByProperties([

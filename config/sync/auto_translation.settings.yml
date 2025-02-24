@@ -1,0 +1,8 @@
+auto_translation_content_types:
+  article: article
+  page: 0
+auto_translation_api_enabled: false
+auto_translation_api_key: ''
+auto_translation_provider: google
+interval: null
+auto_translation_excluded_fields: 'comment, field_image, field_link, field_source, field_uuid'

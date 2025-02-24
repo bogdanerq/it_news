@@ -4,9 +4,8 @@ module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
   advanced_language_selector: 0
-  ai: 0
-  ai_provider_openai: 0
   announcements_feed: 0
+  auto_translation: 0
   automated_cron: 0
   better_exposed_filters: 0
   big_pipe: 0
@@ -40,7 +39,7 @@ module:
   menu_link_content: 0
   menu_ui: 0
   mysql: 0
-  news_all_text: 0
+  news_auto_translate: 0
   news_maker_api: 0
   node: 0
   options: 0
@@ -54,9 +53,6 @@ module:
   taxonomy: 0
   taxonomy_menu: 0
   text: 0
-  tmgmt: 0
-  tmgmt_content: 0
-  tmgmt_google: 0
   token: 0
   toolbar: 0
   ultimate_cron: 0

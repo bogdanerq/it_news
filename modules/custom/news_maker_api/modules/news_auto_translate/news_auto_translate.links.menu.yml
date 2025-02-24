@@ -1,0 +1,4 @@
+news_auto_translate.admin_settings:
+  title: 'News Auto Translate settings'
+  parent: news_maker_api.admin_settings
+  route_name: news_auto_translate.settings

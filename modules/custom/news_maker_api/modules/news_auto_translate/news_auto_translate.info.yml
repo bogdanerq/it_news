@@ -1,0 +1,10 @@
+name: 'News Auto Translate'
+type: module
+description: 'Automatic translation of nodes after they are created.'
+core_version_requirement: ^10 || ^11
+package: Custom
+configure: news_auto_translate.settings
+
+dependencies:
+  - drupal:news_maker_api
+  - drupal:auto_translation

@@ -4,14 +4,26 @@ status: true
 dependencies:
   module:
     - news_maker_api
-title: 'Default cron handler'
+title: 'News maker api'
 id: news_maker_api_cron
 weight: 0
 module: news_maker_api
 callback: 'news_maker_api#cron'
 scheduler:
   id: simple
+  configuration:
+    rules:
+      - '0+@ */3 * * *'
 launcher:
   id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
 logger:
   id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

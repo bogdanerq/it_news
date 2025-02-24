@@ -2,6 +2,13 @@
 @import "typography";
 
 .page-view-taxonomy-term {
+
+  .title {
+    font-size: $h1-font-size;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+  }
+
   .field {
     margin: $bottom-space;
   }

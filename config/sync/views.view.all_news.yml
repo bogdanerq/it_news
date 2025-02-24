@@ -1003,7 +1003,7 @@ display:
             pause: 1
             pause_on_click: 0
             action_advanced: 1
-            start_paused: 1
+            start_paused: 0
             remember_slide: 0
             remember_slide_days: '1'
             pause_in_middle: 0

@@ -1,4 +1,4 @@
-ai.admin_settings:
+news_maker_api.admin_settings:
   title: 'News maker api settings'
   parent: system.admin_config
   route_name: news_maker_api.settings

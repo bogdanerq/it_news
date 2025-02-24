@@ -2,8 +2,12 @@
 
 namespace Drupal\news_maker_api\Form;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\news_maker_api\NewsMakerApiFetcher;
 
 /**
  * Configuration form for News Maker API.
@@ -14,6 +18,39 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
    * A string key editable config name.
    */
   const SETTINGS = 'news_maker_api.settings';
+
+  /**
+   * The News Maker Api fetcher.
+   *
+   * @var \Drupal\news_maker_api\NewsMakerApiFetcher
+   */
+  protected NewsMakerApiFetcher $apiFetcher;
+
+  /**
+   * Constructs a new NegotiationUrlForm object.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The factory for configuration objects.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
+   * @param \Drupal\news_maker_api\NewsMakerApiFetcher $fetcher
+   *   The News Maker Api fetcher.
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typedConfigManager, NewsMakerApiFetcher $fetcher) {
+    parent::__construct($config_factory, $typedConfigManager);
+    $this->apiFetcher = $fetcher;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('config.typed'),
+      $container->get('news_maker_api.fetcher')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -124,9 +161,7 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
    * Custom submit handler for the "Fetch News Now" button.
    */
   public function fetchNews(array &$form, FormStateInterface $form_state) {
-    /** @var \Drupal\news_maker_api\NewsMakerApiFetcher $fetcher */
-    $fetcher = \Drupal::service('news_maker_api.fetcher');
-    $fetcher->fetchNews();
+    $this->apiFetcher->fetchNews();
 
     $this->messenger()->addMessage($this->t('News items have been enqueued.'));
   }
