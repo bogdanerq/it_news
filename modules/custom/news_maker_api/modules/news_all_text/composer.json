@@ -1,9 +1,0 @@
-{
-    "name": "drupal/news_all_text",
-    "description": "Submodule to fetch full news text using the Drupal AI module.",
-    "type": "drupal-module",
-    "license": "GPL-2.0-or-later",
-    "require": {
-        "drupal/ai_provider_openai": "^1.0"
-    }
-}

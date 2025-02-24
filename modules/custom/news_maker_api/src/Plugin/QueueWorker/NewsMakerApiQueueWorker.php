@@ -159,17 +159,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
       $file_id = $this->downloadImage($data['image_url']);
     }
 
-    // Determine body content.
-    if ($this->moduleHandler->moduleExists('news_all_text')) {
-      // If the 'News all text' submodule is enabled, attempt to fetch the full text.
-      /** @var \Drupal\news_all_text\FullTextFetcher $sub_service */
-      $sub_service = \Drupal::service('news_all_text.full_text');
-      $full_text = $sub_service->getFullText($data['url']);
-      $body_content = $full_text ?: $data['snippet'];
-    }
-    else {
-      $body_content = $data['snippet'];
-    }
+    $body_content = $data['snippet'];
 
     // Create an article node with the mapped fields.
     $node = Node::create([
