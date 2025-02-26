@@ -2,7 +2,8 @@
 @import "typography";
 @import "mixins";
 
-body.node--type-article {
+// path-comment for referents on page
+body.node--type-article, body.path-comment {
   .field {
     margin: $bottom-space;
   }

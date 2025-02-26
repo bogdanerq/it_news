@@ -35,6 +35,7 @@
         "drupal/taxonomy_menu": "^3.7",
         "drupal/tmgmt": "^1.17",
         "drupal/tmgmt_google": "^1.2",
+        "drupal/turnstile": "^1.1",
         "drupal/ultimate_cron": "^2.0@beta",
         "drupal/views_field_view": "^1.0@beta",
         "drupal/views_slideshow": "^5.0",
@@ -67,6 +68,9 @@
         "patches": {
             "drupal/core": {
                 "Comments are not filtered on language": "https://www.drupal.org/files/issues/2024-01-23/2751267-62.patch"
+            },
+            "drupal/captcha": {
+                "Image captcha reload produces a JSON error": "https://www.drupal.org/files/issues/2025-02-12/image_captcha_refresh-3489166-14.patch"
             }
         },
         "drupal-scaffold": {

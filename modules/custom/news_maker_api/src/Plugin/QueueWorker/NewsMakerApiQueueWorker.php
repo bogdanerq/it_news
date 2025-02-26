@@ -136,7 +136,7 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
     // Check if a node with the same UUID already exists.
     $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties([
       'type' => 'article',
-      'field_uuid' => $data['uuid'],
+      'field_uuid' => $data['id'],
     ]);
     if (!empty($nodes)) {
       return;
@@ -144,8 +144,8 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
 
     // Process categories: create or retrieve taxonomy terms for the 'tags' vocabulary.
     $term_ids = [];
-    if (!empty($data['categories']) && is_array($data['categories'])) {
-      foreach ($data['categories'] as $category) {
+    if (!empty($data['topics']) && is_array($data['topics'])) {
+      foreach ($data['topics'] as $category) {
         $term = $this->getOrCreateTerm(trim($category));
         if ($term) {
           $term_ids[] = $term->id();
@@ -155,24 +155,35 @@ class NewsMakerApiQueueWorker extends QueueWorkerBase implements ContainerFactor
 
     // Download the image file if provided.
     $file_id = NULL;
-    if (!empty($data['image_url'])) {
-      $file_id = $this->downloadImage($data['image_url']);
+    if (!empty($data['media_url'])) {
+      $file_id = $this->downloadImage($data['media_url']);
     }
 
-    $body_content = $data['snippet'];
+    // sometimes the description can be bigger than the content
+    $maxLength = 600;
+    if (mb_strlen($data['description']) > $maxLength) {
+      $summary = mb_substr($data['description'], 0, $maxLength) . '...';
+    } else {
+      $summary = $data['description'];
+    }
+
 
     // Create an article node with the mapped fields.
     $node = Node::create([
       'type' => 'article',
       'title' => $data['title'],
-      'created' => strtotime($data['published_at']),
-      'field_uuid' => $data['uuid'],
-      'field_link' => ['uri' => $data['url']],
-      'field_source' => $data['source'],
+      'created' => strtotime($data['pub_date']),
+      'langcode' => $data['language'],
+      'field_uuid' => $data['id'],
+      'field_link' => ['uri' => $data['article_link']],
+      'field_source' => [
+        'title' => $data['source_title'],
+        'uri' => $data['source_link'],
+      ],
       'field_tags' => $term_ids,
       'body' => [
-        'value' => $body_content,
-        'summary' => $data['description'],
+        'value' => $data['content'],
+        'summary' => $summary,
         'format' => 'basic_html',
       ],
     ]);

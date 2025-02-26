@@ -2,6 +2,7 @@
 
 namespace Drupal\news_maker_api\Form;
 
+use Drupal\Core\Language\LanguageManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
@@ -27,6 +28,13 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
   protected NewsMakerApiFetcher $apiFetcher;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected LanguageManagerInterface $languageManager;
+
+  /**
    * Constructs a new NegotiationUrlForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -36,9 +44,10 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
    * @param \Drupal\news_maker_api\NewsMakerApiFetcher $fetcher
    *   The News Maker Api fetcher.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typedConfigManager, NewsMakerApiFetcher $fetcher) {
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typedConfigManager, NewsMakerApiFetcher $fetcher, LanguageManagerInterface $language_manager) {
     parent::__construct($config_factory, $typedConfigManager);
     $this->apiFetcher = $fetcher;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -48,7 +57,8 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
     return new static(
       $container->get('config.factory'),
       $container->get('config.typed'),
-      $container->get('news_maker_api.fetcher')
+      $container->get('news_maker_api.fetcher'),
+      $container->get('language_manager')
     );
   }
 
@@ -72,6 +82,13 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config(static::SETTINGS);
 
+    $form['api_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('API url'),
+      '#default_value' => $config->get('api_url'),
+      '#required' => TRUE,
+    ];
+
     $form['api_key'] = [
       '#type' => 'key_select',
       '#title' => $this->t('API Key'),
@@ -79,44 +96,51 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
+    $languages = $this->languageManager->getLanguages();
+    $language_options = [];
+    foreach ($languages as $language) {
+      $language_options[$language->getId()] = $language->getName();
+    }
+
     $form['language'] = [
-      '#type' => 'textfield',
+      '#type' => 'select',
       '#title' => $this->t('Language'),
+      '#options' => $language_options,
       '#default_value' => $config->get('language'),
-      '#description' => $this->t('Comma-separated list of languages (en,uk)'),
     ];
 
     $form['keywords'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Keywords'),
       '#default_value' => $config->get('keywords'),
-      '#description' => $this->t('Keywords for news search'),
+      '#placeholder' => $this->t('apple banana or "apple pie"'),
+      '#description' => $this->t('Keywords for news search, separated by a space or for exact phrases "apple pie"'),
     ];
 
     $form['categories'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Categories'),
       '#default_value' => $config->get('categories'),
-      '#description' => $this->t('Comma-separated list of categories (general,tech)'),
-      '#placeholder' => $this->t('general,tech'),
+      '#description' => $this->t('Comma-separated list of categories (general, tech)'),
+      '#placeholder' => $this->t('general, tech'),
     ];
 
-    $form['published_before'] = [
+    $form['start_date'] = [
       '#type' => 'date',
-      '#title' => $this->t('Published Before'),
-      '#default_value' => $config->get('published_before'),
+      '#title' => $this->t('From Date'),
+      '#default_value' => $config->get('start_date'),
     ];
 
-    $form['published_after'] = [
+    $form['end_date'] = [
       '#type' => 'date',
-      '#title' => $this->t('Published After'),
-      '#default_value' => $config->get('published_after'),
+      '#title' => $this->t('Until Date'),
+      '#default_value' => $config->get('end_date'),
     ];
 
     $form['limit'] = [
       '#type' => 'number',
       '#title' => $this->t('News Limit'),
-      '#default_value' => $config->get('limit') ?: 3,
+      '#default_value' => $config->get('limit') ?: 20,
       '#min' => 1,
       '#description' => $this->t('Number of news items to receive'),
     ];
@@ -145,12 +169,13 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->configFactory->getEditable(static::SETTINGS)
+      ->set('api_url', $form_state->getValue('api_url'))
       ->set('api_key', $form_state->getValue('api_key'))
       ->set('language', $form_state->getValue('language'))
       ->set('keywords', $form_state->getValue('keywords'))
       ->set('categories', $form_state->getValue('categories'))
-      ->set('published_before', $form_state->getValue('published_before'))
-      ->set('published_after', $form_state->getValue('published_after'))
+      ->set('start_date', $form_state->getValue('start_date'))
+      ->set('end_date', $form_state->getValue('end_date'))
       ->set('limit', $form_state->getValue('limit'))
       ->save();
 
@@ -161,9 +186,12 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
    * Custom submit handler for the "Fetch News Now" button.
    */
   public function fetchNews(array &$form, FormStateInterface $form_state) {
-    $this->apiFetcher->fetchNews();
-
-    $this->messenger()->addMessage($this->t('News items have been enqueued.'));
+    if ($this->apiFetcher->fetchNews()) {
+      $this->messenger()->addMessage($this->t('News items have been enqueued.'));
+    }
+    else {
+      $this->messenger()->addError($this->t('Some shit happened, check Recent log messages.'));
+    }
   }
 
 }

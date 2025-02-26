@@ -12,6 +12,7 @@ module:
   block: 0
   block_content: 0
   breakpoint: 0
+  captcha: 0
   ckeditor5: 0
   comment: 0
   config: 0
@@ -32,6 +33,7 @@ module:
   help: 0
   history: 0
   image: 0
+  image_captcha: 0
   key: 0
   language: 0
   link: 0
@@ -55,6 +57,7 @@ module:
   text: 0
   token: 0
   toolbar: 0
+  turnstile: 0
   ultimate_cron: 0
   user: 0
   views_field_view: 0

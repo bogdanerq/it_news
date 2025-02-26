@@ -8,6 +8,8 @@ display:
         filename:
           label: "Назва (ім'я)"
           separator: ', '
+        filesize:
+          label: Розмір
         status:
           label: Стан
         operations:
@@ -29,6 +31,9 @@ display:
           sort_asc_label: Зрост
           sort_desc_label: Спад
       filters:
+        filename:
+          expose:
+            label: 'Назва файла'
         status:
           expose:
             label: Стан

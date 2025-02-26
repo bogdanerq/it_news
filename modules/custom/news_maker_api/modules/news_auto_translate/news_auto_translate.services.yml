@@ -1,6 +1,6 @@
 services:
   news_auto_translate.node_translation_subscriber:
     class: Drupal\news_auto_translate\EventSubscriber\NodeTranslationSubscriber
-    arguments: ['@config.factory', '@entity_field.manager', '@auto_translation.utility']
+    arguments: ['@config.factory', '@entity_field.manager', '@auto_translation.utility', '@language_manager']
     tags:
       - { name: 'event_subscriber' }

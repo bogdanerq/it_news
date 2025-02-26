@@ -30,7 +30,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   comment:
     type: comment_default
@@ -60,23 +60,27 @@ content:
     region: content
   field_link:
     type: link
-    label: inline
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
+      target: _blank
     third_party_settings: {  }
     weight: 3
     region: content
   field_source:
-    type: string
-    label: inline
+    type: link
+    label: hidden
     settings:
-      link_to_entity: false
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_tags:
     type: entity_reference_label

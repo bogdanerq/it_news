@@ -80,7 +80,7 @@
         {{ content.field_image }}
       </div>
     {% endif %}
-    {% if content.field_tags %}
+    {% if content.field_tags|render|striptags|trim %}
       <div class="category">
         {{ content.field_tags }}
       </div>

@@ -181,4 +181,13 @@ html.dark {
       color: $black;
     }
   }
+
+  // captcha styles fix
+  .toast-body {
+    background-color: rgb($black, 0.85);
+  }
+  .reload-captcha {
+    filter: invert(1) sepia(1) hue-rotate(180deg) saturate(1000%);
+  }
+
 }

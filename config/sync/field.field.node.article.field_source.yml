@@ -1,10 +1,12 @@
-uuid: e3030e10-7407-4a43-a812-f83f0c67e233
+uuid: 7f147ffb-9b2e-45f2-8cbf-332c7bece7cc
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_source
     - node.type.article
+  module:
+    - link
 id: node.article.field_source
 field_name: field_source
 entity_type: node
@@ -12,8 +14,10 @@ bundle: article
 label: source
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
-field_type: string
+settings:
+  title: 1
+  link_type: 17
+field_type: link

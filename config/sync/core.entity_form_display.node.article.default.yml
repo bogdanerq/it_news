@@ -64,12 +64,12 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
   field_source:
-    type: string_textfield
+    type: link_default
     weight: 14
     region: content
     settings:
-      size: 60
-      placeholder: ''
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
