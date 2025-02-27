@@ -25,4 +25,17 @@ body.node--type-article, body.path-comment {
   .field--name-comment {
     margin-top: 30px;
   }
+
+  .field--name-field-source {
+    a {
+      font-size: $h1-font-size;
+      font-weight: $font-weight-bold;
+      color: $text-black;
+      text-decoration: underline;
+    }
+  }
+
+  .field--name-field-link {
+    @include original();
+  }
 }

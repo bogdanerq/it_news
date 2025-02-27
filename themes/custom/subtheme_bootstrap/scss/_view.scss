@@ -10,7 +10,7 @@
     width: 25%;
 
     form.views-exposed-form {
-      background-color: $secondary;
+      background-color: var(--bs-secondary);;
       color: $white;
       border-radius: 10px;
       text-align: left;

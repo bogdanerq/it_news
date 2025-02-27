@@ -30,7 +30,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   comment:
     type: comment_default
@@ -80,7 +80,7 @@ content:
       rel: '0'
       target: _blank
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   field_tags:
     type: entity_reference_label

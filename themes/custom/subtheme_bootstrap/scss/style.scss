@@ -26,8 +26,7 @@ a {
 }
 
 .site-footer {
-    //background: var(--bs-secondary);
-    background: $primary;
+    background: var(--bs-primary);
 }
 
 .site-name-slogan a {
@@ -82,7 +81,7 @@ a {
 }
 
 .featured-top {
-  background: $secondary;
+  background: var(--bs-secondary);
   margin-bottom: 1rem;
 
   .region-featured-top {
@@ -143,6 +142,8 @@ html.dark {
     .comment__author,
     .comment-add,
     .breadcrumb,
+    .field--name-field-source,
+    .field--name-body,
     .node__title {
       a {
         color: $light;
@@ -174,6 +175,11 @@ html.dark {
           background-color: #121212;
         }
       }
+    }
+
+    // 'Read original' link
+    .field--name-field-link {
+      @include original($yellow);
     }
 
     // comment textarea fix

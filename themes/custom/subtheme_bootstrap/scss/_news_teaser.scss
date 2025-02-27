@@ -34,6 +34,14 @@
       }
       @include category;
     }
+
+    .read-more {
+      padding: 0.5rem 0;
+
+      .field--name-field-link {
+        @include original();
+      }
+    }
   }
 
   h2 {

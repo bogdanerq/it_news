@@ -11,10 +11,10 @@ dependencies:
     - field.field.node.article.field_source
     - field.field.node.article.field_tags
     - field.field.node.article.field_uuid
-    - image.style.large
     - node.type.article
   module:
     - image
+    - link
     - text
     - user
 _core:
@@ -37,11 +37,23 @@ content:
     label: hidden
     settings:
       image_link: content
-      image_style: large
+      image_style: ''
       image_loading:
         attribute: lazy
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_tags:
     type: entity_reference_label
@@ -53,7 +65,6 @@ content:
     region: content
 hidden:
   comment: true
-  field_link: true
   field_source: true
   field_uuid: true
   langcode: true

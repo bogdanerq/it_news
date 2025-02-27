@@ -16,7 +16,9 @@ $white: #fff;
 $gray-100: #f8f9fa;
 $gray-800: #343a40;
 // scss-docs-start theme-color-variables
+//$primary: var(--bs-primary);
 $primary: $accent-shade;
+//$secondary: var(--bs-secondary);
 $secondary: $primary-shade;
 $success: $green;
 $info: $cyan;

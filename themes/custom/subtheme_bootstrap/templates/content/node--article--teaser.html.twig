@@ -104,10 +104,15 @@
           {{ metadata }}
         </div>
       {% endif %}
+      {% if content.field_link|render|striptags|trim %}
+        <div class="read-more">
+          {{ content.field_link }}
+        </div>
+      {% endif %}
     </header>
   </div>
 
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ content | without(content.field_image, content.field_tags) }}
+    {{ content | without(content.field_image, content.field_tags, content.field_link) }}
   </div>
 </article>

@@ -128,6 +128,7 @@ class NodeTranslationSubscriber implements EventSubscriberInterface {
                   }
                 }
               }
+              // Translate string fields
               if (!empty($string) && $string !== '' && strip_tags($string) !== '' && !empty(strip_tags($string))) {
                 $translationResponse = $this->autoTranslationUtility->translate($string, $d_lang, $t_lang);
                 if ($translationResponse) {

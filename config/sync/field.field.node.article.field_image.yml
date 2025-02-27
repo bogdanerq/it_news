@@ -23,7 +23,7 @@ settings:
   handler: 'default:file'
   handler_settings: {  }
   file_directory: news-posters
-  file_extensions: 'png gif jpg jpeg webp svg cms'
+  file_extensions: 'png gif jpg jpeg webp svg cms bin'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''

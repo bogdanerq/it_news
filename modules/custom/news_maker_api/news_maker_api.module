@@ -9,6 +9,6 @@
  * Implements hook_cron().
  */
 function news_maker_api_cron() {
-//  $fetcher = \Drupal::service('news_maker_api.fetcher');
-//  $fetcher->fetchNews();
+  $fetcher = \Drupal::service('news_maker_api.fetcher');
+  $fetcher->fetchNews();
 }
