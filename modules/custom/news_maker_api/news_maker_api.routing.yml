@@ -5,3 +5,11 @@ news_maker_api.settings:
     _title: 'News maker api settings'
   requirements:
     _permission: 'administer site configuration'
+
+news_maker_api.admin_index:
+  path: '/admin/config/news-maker-api'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'News api settings'
+  requirements:
+    _permission: 'access administration pages'

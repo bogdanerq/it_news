@@ -3,6 +3,7 @@
 namespace Drupal\news_maker_api\Form;
 
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Queue\QueueFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
@@ -21,6 +22,11 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
   const SETTINGS = 'news_maker_api.settings';
 
   /**
+   * A string key query name.
+   */
+  const QUEUE_NAME = 'news_maker_api_queue_worker';
+
+  /**
    * The News Maker Api fetcher.
    *
    * @var \Drupal\news_maker_api\NewsMakerApiFetcher
@@ -35,6 +41,13 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
   protected LanguageManagerInterface $languageManager;
 
   /**
+   * The queue factory.
+   *
+   * @var \Drupal\Core\Queue\QueueFactory
+   */
+  protected QueueFactory $queueFactory;
+
+  /**
    * Constructs a new NegotiationUrlForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -43,11 +56,14 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
    *   The typed config manager.
    * @param \Drupal\news_maker_api\NewsMakerApiFetcher $fetcher
    *   The News Maker Api fetcher.
+   * @param \Drupal\Core\Queue\QueueFactory $queue_factory
+   *   The queue factory.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typedConfigManager, NewsMakerApiFetcher $fetcher, LanguageManagerInterface $language_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typedConfigManager, NewsMakerApiFetcher $fetcher, LanguageManagerInterface $language_manager, QueueFactory $queue_factory) {
     parent::__construct($config_factory, $typedConfigManager);
     $this->apiFetcher = $fetcher;
     $this->languageManager = $language_manager;
+    $this->queueFactory = $queue_factory;
   }
 
   /**
@@ -58,7 +74,8 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('config.typed'),
       $container->get('news_maker_api.fetcher'),
-      $container->get('language_manager')
+      $container->get('language_manager'),
+      $container->get('queue')
     );
   }
 
@@ -155,10 +172,19 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
     $form['actions']['fetch_news'] = [
       '#type' => 'submit',
       '#value' => $this->t('Fetch News Now'),
-      // Specify a separate submit handler.
+      '#name' => 'fetch_news',
       '#submit' => ['::fetchNews'],
-      // Skip validation to allow manual triggering.
       '#limit_validation_errors' => [],
+    ];
+
+    // Add an extra button to manually process news.
+    $form['actions']['queue_process'] = [
+      '#type' => 'submit',
+      '#name' => 'queue_process',
+      '#process' => ['::processDynamicField'],
+      '#submit' => ['::queueProcess'],
+      '#limit_validation_errors' => [],
+      '#cache' => ['max-age' => 0],
     ];
 
     return parent::buildForm($form, $form_state);
@@ -192,6 +218,24 @@ class NewsMakerApiSettingsForm extends ConfigFormBase {
     else {
       $this->messenger()->addError($this->t('Some shit happened, check Recent log messages.'));
     }
+  }
+
+  /**
+   * Custom submit handler for the "Run queue process" button.
+   */
+  public function queueProcess(array &$form, FormStateInterface $form_state) {
+    // Redirect to the queue processing route, using queue_ui module.
+    $form_state->setRedirect('queue_ui.process', ['queueName' => static::QUEUE_NAME]);
+  }
+
+  /**
+   * Process handler for subform submit.
+   */
+  public function processDynamicField($element) {
+    // get queue items ready for processing
+    $queue = $this->queueFactory->get(static::QUEUE_NAME);
+    $element['#value'] = $this->t('Run queue process ') . '(' . $queue->numberOfItems() . ')';
+    return $element;
   }
 
 }

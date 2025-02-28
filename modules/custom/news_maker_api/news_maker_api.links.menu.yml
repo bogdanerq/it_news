@@ -1,4 +1,10 @@
+news_maker_api.button:
+  title: 'News api settings'
+  parent: system.admin_config
+  route_name: news_maker_api.admin_index
+
 news_maker_api.admin_settings:
   title: 'News maker api settings'
-  parent: system.admin_config
+  parent: news_maker_api.button
   route_name: news_maker_api.settings
+  weight: -100

@@ -7,4 +7,5 @@ configure: news_maker_api.settings
 
 dependencies:
   - drupal:node
+  - drupal:queue_ui
   - key:key

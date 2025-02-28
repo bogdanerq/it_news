@@ -119,6 +119,9 @@ class NewsMakerApiFetcher {
       $query['end_date'] = $end_date;
     }
 
+    // set limit per_page, default 10 (depends on subscription plan)
+    $query['per_page'] = $limit;
+
     // formed api_url
     $api_url .= '?' . http_build_query($query);
 
@@ -131,6 +134,7 @@ class NewsMakerApiFetcher {
     $news_count = 0;
     $next_cursor = '';
     try {
+      // do-while cycle to process the next page request
       do {
         // cursor parameter using for get next page
         if (!empty($next_cursor)) {
