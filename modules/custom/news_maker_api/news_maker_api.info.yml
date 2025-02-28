@@ -1,6 +1,6 @@
 name: 'News maker api'
 type: module
-description: 'Integration of thenewsapi to retrieve news and create article type nodes.'
+description: 'Integration of newsdatahub.com to retrieve news and create article type nodes.'
 core_version_requirement: ^10 || ^11
 package: Custom
 configure: news_maker_api.settings

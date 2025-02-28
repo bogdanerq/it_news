@@ -2,7 +2,10 @@ settings:
   default_submit_button_label: Надіслати
   default_reset_button_label: Скинути
   default_delete_button_label: Видалити
+  default_wizard_prev_button_label: '< Попередня'
+  default_wizard_next_button_label: 'Наступна ›'
   default_preview_next_button_label: 'Попередній перегляд'
+  default_preview_prev_button_label: '< Попередня'
   default_preview_label: 'Попередній перегляд'
   dialog_options:
     normal:

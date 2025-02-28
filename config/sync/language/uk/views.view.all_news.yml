@@ -30,3 +30,15 @@ display:
             label: 'Ключові слова'
       menu:
         title: 'Всі новини'
+      pager:
+        options:
+          tags:
+            first: '« Перша'
+            last: 'Остання »'
+      exposed_form:
+        options:
+          submit_button: Виконати
+          reset_button_label: Скинути
+          exposed_sorts_label: 'Сортувати за'
+          sort_asc_label: Старіші
+          sort_desc_label: Новіші

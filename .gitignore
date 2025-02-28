@@ -58,7 +58,7 @@ sites/simpletest
 /index.php
 /INSTALL.txt
 /LICENSE.txt
-/README.md
+#/README.md
 /robots.txt
 /update.php
 /web.config

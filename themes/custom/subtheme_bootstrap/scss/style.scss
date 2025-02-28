@@ -139,17 +139,19 @@ html.dark {
       }
     }
 
+    // links color change
     .views-field-name,
     .comment__author,
     .comment-add,
     .breadcrumb,
     .field--name-field-source,
-    .field--name-body,
+    .text-formatted,
     .node__title {
       a {
         color: $light;
       }
     }
+
     .breadcrumb-item::before {
       color: $light;
     }

@@ -1,7 +1,7 @@
 api_key: news_api
 language: en
 keywords: ''
-categories: ''
+categories: 'internet, finance, entertainment, gaming, technology, cryptocurrency, investment, blockchain'
 limit: '20'
 start_date: ''
 end_date: ''

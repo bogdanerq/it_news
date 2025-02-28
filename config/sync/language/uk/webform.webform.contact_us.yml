@@ -1,0 +1,37 @@
+title: "Зв'язатися з нами"
+elements: |
+  contact_reason:
+    '#title': 'Причина контакту'
+  contact_reason_select:
+    '#title': 'Причина контакту'
+    '#options':
+      advertising: 'Рекламна пропозиція'
+      complaint: Скарга
+      correction: 'Виправлення новини'
+      new_news: 'Подача нових новин'
+      cooperation: 'Прохання про співпрацю'
+      information: 'Запит на інформацію'
+  contact_details:
+    '#title': 'Контактні дані'
+  response:
+    '#title': відповідь
+    '#name__title': "Ім'я"
+    '#company__title': Компанія
+    '#email__title': 'Електронна пошта'
+    '#phone__title': Телефон
+    '#address__title': Адреса
+    '#address_2__title': 'Адреса 2'
+    '#city__title': Місто/вилиця
+    '#state_province__title': Штат/провінція
+    '#postal_code__title': 'ZIP/Поштовий індекс'
+    '#country__title': Країна
+  new_news_text:
+    '#text': '<p>Що цікавого ви знаєте?</p>'
+  complaint_text:
+    '#text': '<p>Чому ми такі злі та незадоволені?</p>'
+  news_to_correct:
+    '#title': 'Новини для виправлення'
+  details:
+    '#title': Подробиці
+settings:
+  confirmation_message: '<p>Ми розглянемо ваш запит і дамо відповідь, коли адміністратор вийде зі сплячки і перегляне його</p>'
