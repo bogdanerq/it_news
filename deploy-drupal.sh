@@ -30,20 +30,20 @@ echo "📦 Installing dependencies with Composer..."
 docker compose exec php composer install
 
 echo "🗄 Importing database..."
-docker compose exec -T mariadb sh -c "mysql -u user -puser default < db_backup.sql"
+docker exec -i drupal-db-test mysql -u user -puser default < db_backup.sql
 
 echo "📂 Merging files into sites/default/files..."
 mkdir -p ./sites/default/files &&
 cp -rT ./files ./sites/default/files
 
 echo "⚙️ Importing Drupal configuration..."
-docker compose exec php drush cim -y
+docker compose exec php vendor/bin/drush cim -y
 
 echo "🔄 Updating database..."
-docker compose exec php drush updb -y
+docker compose exec php vendor/bin/drush updb -y
 
 echo "🧹 Clearing cache..."
-docker compose exec php drush cr
+docker compose exec php vendor/bin/drush cr
 
 echo "🔑 Generating admin login link..."
-docker compose exec php drush uli
+docker compose exec php vendor/bin/drush uli

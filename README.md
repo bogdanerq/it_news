@@ -2,6 +2,8 @@
 
 This project is a Drupal 10 website built for a test site called **IT News**. It leverages Docker for containerized deployment and includes custom modules, themes, and several contributed modules to enhance functionality.
 
+git project used `git config core.fileMode false (ignore typechange)`
+
 ## Table of Contents
 
 - [Docker Setup](#docker-setup)
@@ -15,15 +17,15 @@ This project is a Drupal 10 website built for a test site called **IT News**. It
 
 ## Docker Setup
 
-- **Docker Compose:** The project uses a `docker-compose.yml` file that sets up the Docker environment. In this file, the `build: .` directive ensures that the Dockerfile in the project root is used.
+- **Docker Compose:** The project uses a `docker-compose.yml` file that sets up the Docker environment. In this file, the `build: .` directive ensures that the Dockerfile in the project root is used. Also added parameter `user: "1000:1000"` so that created and updated files are not only for root access.
 - **Xdebug Configuration:** The Dockerfile is configured to install and enable Xdebug with its configuration file `xdebug.ini`. Note that the Xdebug port is set to **9005** (instead of the default 9003) to avoid conflicts.
-- **Deployment Script:** An additional deployment script (`deploy-drupal.sh`) is provided for automatic deployment. This script can be modified as needed.
+- **Deployment Script:** An additional deployment script (`deploy-drupal.sh`) is provided for automatic deployment. This script can be modified as needed. If there is a problem with the composer, remove the parameter `user: "1000:1000"` in `docker-compose.yml`. Execute the command to run it.
+  ```bash
+    chmod +x deploy-drupal.sh
+    ./deploy-drupal.sh
+  ```
 - **Directory with files:** https://drive.google.com/drive/folders/1kTyjDdnx6H3wMizF2rGgzrLp42LfQ6XT?usp=drive_link
 
-```bash
-  chmod +x deploy-drupal.sh
-  ./deploy-drupal.sh
-```
 
 For more details on Docker and Docker Compose, see the [Docker documentation](https://www.docker.com) and the [Compose documentation](https://docs.docker.com/compose/).
 
