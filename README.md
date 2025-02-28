@@ -20,6 +20,11 @@ This project is a Drupal 10 website built for a test site called **IT News**. It
 - **Deployment Script:** An additional deployment script (`deploy-drupal.sh`) is provided for automatic deployment. This script can be modified as needed.
 - **Directory with files:** https://drive.google.com/drive/folders/1kTyjDdnx6H3wMizF2rGgzrLp42LfQ6XT?usp=drive_link
 
+```bash
+  chmod +x deploy-drupal.sh
+  ./deploy-drupal.sh
+```
+
 For more details on Docker and Docker Compose, see the [Docker documentation](https://www.docker.com) and the [Compose documentation](https://docs.docker.com/compose/).
 
 ## Git and Deployment Configuration
