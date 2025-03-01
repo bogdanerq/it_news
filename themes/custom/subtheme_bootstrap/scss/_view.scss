@@ -44,10 +44,6 @@
       }
     }
   }
-  .pagination {
-    display: flex;
-    justify-content: center;
-  }
 }
 
 .view-display-id-slider_news {
@@ -94,6 +90,7 @@
         text-transform: uppercase;
       }
     }
+
     .views-field-view {
       .view-content {
         .views-row {
@@ -105,6 +102,13 @@
         }
       }
     }
+  }
+}
+
+.view {
+  .pagination {
+    display: flex;
+    justify-content: center;
   }
 }
 

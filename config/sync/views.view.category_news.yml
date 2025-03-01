@@ -5,6 +5,7 @@ dependencies:
   config:
     - taxonomy.vocabulary.tags
   module:
+    - node
     - taxonomy
     - user
     - views_field_view
@@ -228,6 +229,21 @@ display:
             field_identifier: ''
           exposed: false
           granularity: day
+        uuid:
+          id: uuid
+          table: node
+          field: uuid
+          relationship: nid
+          group_type: count
+          admin_label: ''
+          entity_type: node
+          entity_field: uuid
+          plugin_id: standard
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         status:
@@ -342,7 +358,16 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        nid:
+          id: nid
+          table: taxonomy_index
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: node
+          plugin_id: standard
+          required: false
       group_by: true
       header: {  }
       footer: {  }
